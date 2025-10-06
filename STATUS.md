@@ -23,3 +23,10 @@
 ## Notes
 - Deep linking best-effort via `lib/deeplinks.ts`; falls back to web.
 - If you set `OPENAI_API_KEY` in Supabase functions, classifier uses LLM; else rules.
+
+
+
+## TODO:
+- shouldnt have to login each time
+- fix spacing
+- update profile page 
