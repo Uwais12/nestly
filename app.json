@@ -4,7 +4,7 @@
     "slug": "nestly",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/NestlyAppIcons/light/77717F00-78F7-4EA9-A7D2-BAA5360987D8.PNG",
+    "icon": "./assets/images/NestlyAppIcons/light/icon2_1024x1024.png",
     "scheme": "nestly",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
