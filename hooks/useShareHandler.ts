@@ -21,10 +21,21 @@ export function useShareHandler() {
   useEffect(() => {
     async function handleDeepLink(url: string | null) {
       if (!url) return;
-      // Expect: nestly://shared?url=ENCODED_URL
-      const host = (() => { try { return new URL(url).host; } catch { return ''; } })();
-      if (host !== 'shared') return;
-      const sharedUrl = getQueryParam(url, 'url');
+      // Accept multiple shapes:
+      // - nestly://shared?url=ENCODED_URL (preferred)
+      // - nestly://dataUrl=nestlyShareKey (legacy)
+      // - nestly://?url=ENCODED_URL
+      let sharedUrl: string | null = null;
+      try {
+        const u = new URL(url);
+        if (u.host === 'shared') {
+          sharedUrl = u.searchParams.get('url');
+        }
+        if (!sharedUrl) {
+          // legacy: dataUrl or url at root
+          sharedUrl = u.searchParams.get('url') || u.searchParams.get('dataUrl');
+        }
+      } catch {}
       if (!sharedUrl) return;
 
       if (!session) {
