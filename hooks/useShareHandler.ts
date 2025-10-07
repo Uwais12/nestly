@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import * as Linking from 'expo-linking';
 import { Alert, Platform } from 'react-native';
 import { useRouter } from 'expo-router';
-import { createItemViaUnfurl } from '@/lib/api';
 import { useSession } from '@/hooks/useSession';
 
 function getQueryParam(url: string, key: string): string | null {
@@ -66,13 +65,8 @@ export function useShareHandler() {
 
       if (!sharedUrl) return;
 
-      const { error } = await createItemViaUnfurl(sharedUrl);
-      if (error) {
-        Alert.alert('Failed to save', error.message ?? 'Could not save this link');
-      } else {
-        Alert.alert('Saved', 'Saved to Inbox');
-        router.replace('/(tabs)/all');
-      }
+      // Navigate to Add Link modal with prefilled URL instead of auto-saving
+      router.push(`/modals/add-link?url=${encodeURIComponent(sharedUrl)}`);
     }
 
     // Initial URL (cold start)

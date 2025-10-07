@@ -1,4 +1,3 @@
-import { createItemViaUnfurl } from '@/lib/api';
 import { useEffect, useRef, useCallback } from 'react';
 import { Alert } from 'react-native';
 import { useRouter } from 'expo-router';
@@ -20,13 +19,9 @@ export function useShareCapture(onHandled?: Handler) {
       router.replace('/(auth)/sign-in');
       return;
     }
-    const { error } = await createItemViaUnfurl(textOrUrl, '');
-    if (error) {
-      Alert.alert('Failed to save', error.message ?? 'Could not save this link');
-    } else {
-      Alert.alert('Saved', 'Saved to Inbox');
-      router.replace('/(tabs)/all');
-    }
+    // Instead of auto-saving, route to the Add Link modal with prefilled URL
+    const encoded = encodeURIComponent(textOrUrl);
+    router.push(`/modals/add-link?url=${encoded}`);
     onHandled?.({ url: textOrUrl, fromBackground, text: undefined });
   }, [session?.user?.id, router]);
 

@@ -1,7 +1,7 @@
 // app/modals/add-link.tsx
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Alert, KeyboardAvoidingView, Platform, StyleSheet, View, Text } from 'react-native';
-import { useRouter } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import { createItemViaUnfurl } from '@/lib/api';
 import { theme } from '@/constants/theme';
 import { Input } from '@/components/ui/Input';
@@ -15,6 +15,14 @@ export default function AddLinkModal() {
   const [loading, setLoading] = useState(false);
   const [errorText, setErrorText] = useState('');
   const router = useRouter();
+  const params = useLocalSearchParams<{ url?: string | string[]; note?: string | string[] }>();
+
+  useEffect(() => {
+    const incomingUrl = Array.isArray(params?.url) ? params?.url?.[0] : params?.url;
+    const incomingNote = Array.isArray(params?.note) ? params?.note?.[0] : params?.note;
+    if (incomingUrl && !url) setUrl(String(incomingUrl));
+    if (incomingNote && !note) setNote(String(incomingNote));
+  }, [params]);
 
   async function onSave() {
     if (!/^https?:\/\//i.test(url)) { setErrorText('Enter a valid URL'); return; }
