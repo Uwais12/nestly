@@ -26,6 +26,7 @@ export function useShareHandler() {
       // - nestly://dataUrl=nestlyShareKey (legacy)
       // - nestly://?url=ENCODED_URL
       let sharedUrl: string | null = null;
+      let hasDataUrlKey = false;
       try {
         const u = new URL(url);
         if (u.host === 'shared') {
@@ -34,15 +35,36 @@ export function useShareHandler() {
         if (!sharedUrl) {
           // legacy: dataUrl or url at root
           sharedUrl = u.searchParams.get('url') || u.searchParams.get('dataUrl');
+          hasDataUrlKey = !!u.searchParams.get('dataUrl') && !u.searchParams.get('url');
         }
       } catch {}
-      if (!sharedUrl) return;
+      if (!sharedUrl && !hasDataUrlKey) return;
 
       if (!session) {
         Alert.alert('Sign in required', 'Please sign in to save shares.');
         router.replace('/(auth)/sign-in');
         return;
       }
+
+      // If the deep link provided a dataUrl key (expo-share-intent style), fetch the actual shared data now
+      if (!sharedUrl && hasDataUrlKey) {
+        try {
+          // eslint-disable-next-line @typescript-eslint/no-var-requires
+          const ShareIntent = require('expo-share-intent');
+          const getSharedData = ShareIntent?.getSharedData as undefined | (() => Promise<any[] | null>);
+          const clearSharedData = ShareIntent?.clearSharedData as undefined | (() => Promise<void>);
+          if (typeof getSharedData === 'function') {
+            const items = await getSharedData();
+            const first = items && items[0];
+            const dataArr = Array.isArray(first?.data) ? first.data : [];
+            const textOrUrl = typeof dataArr[0] === 'string' ? dataArr[0] : undefined;
+            if (textOrUrl) sharedUrl = textOrUrl;
+            if (typeof clearSharedData === 'function') await clearSharedData();
+          }
+        } catch {}
+      }
+
+      if (!sharedUrl) return;
 
       const { error } = await createItemViaUnfurl(sharedUrl);
       if (error) {
