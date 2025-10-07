@@ -27,7 +27,7 @@ export function TabBar({ state, navigation }: BottomTabBarProps) {
   return (
     <BlurView
       intensity={28}
-      tint="dark"
+      tint="light"
       style={[
         styles.wrap,
         {
@@ -80,8 +80,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: theme.colors.glassStroke,
     shadowColor: '#000',
-    shadowOpacity: 0.22,
-    shadowRadius: 18,
+    shadowOpacity: 0.14,
+    shadowRadius: 16,
     shadowOffset: { width: 0, height: 14 },
     elevation: 12,
   },

@@ -3,31 +3,31 @@ import { Platform } from 'react-native';
 
 export const theme = {
   colors: {
-    // Surfaces
-    bg: '#0A0C10',           // app background (deeper charcoal)
-    card: '#10131A',         // elevated cards
-    surface: '#0D1117',      // control surfaces / inputs
-    surfaceAlt: '#0F131A',   // subtle alternative surface
+    // Light (Apple-like)
+    bg: '#FBFBFD',           // near-white
+    card: '#FFFFFF',         // surfaces
+    surface: '#FFFFFF',      // inputs
+    surfaceAlt: '#FFFFFF',
 
     // Text
-    text: '#E6EAF0',
-    textMuted: '#95A1AE',
-    textFaint: '#6C7785',
+    text: '#0A0A0A',
+    textMuted: '#6B7280',
+    textFaint: 'rgba(0,0,0,0.45)',
 
     // Brand
-    brand: '#7BD7FF',        // primary accent
-    brandAlt: '#A9A1FF',
+    brand: '#4F8EF7',        // Nestly Blue
+    brandAlt: '#4F8EF7',
 
     // UI States
-    border: '#1A2029',
-    borderAlt: 'rgba(255,255,255,0.08)',
+    border: 'rgba(0,0,0,0.06)',
+    borderAlt: 'rgba(0,0,0,0.06)',
     success: '#3DD9A3',
     danger: '#FF6B6B',
     warning: '#FFC069',
     info: '#6FB7FF',
-    elevatedBg: 'rgba(18,21,26,0.75)',
-    glassStroke: 'rgba(255,255,255,0.14)',
-    glassBg: 'rgba(13,17,23,0.45)',
+    elevatedBg: 'rgba(255,255,255,0.75)',
+    glassStroke: 'rgba(0,0,0,0.06)',
+    glassBg: 'rgba(255,255,255,0.80)',
   },
   radius: 16,
   radiusMd: 12,

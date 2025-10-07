@@ -1,5 +1,6 @@
 // app/_layout.tsx
 import { Stack } from 'expo-router';
+import { DockProvider } from '@/hooks/useDockState';
 import { StatusBar } from 'expo-status-bar';
 import { AuthProvider } from '@/hooks/useSession';
 import { useShareCapture } from '@/hooks/useShareCapture';
@@ -12,6 +13,7 @@ export default function RootLayout() {
       {/* Global default; individual screens can override */}
       <StatusBar style="light" animated />
       <ShareBootstrapper />
+      <DockProvider>
       <Stack screenOptions={{ headerShown: false }}>
         {/* Public & guards */}
         <Stack.Screen name="(auth)/sign-in" />
@@ -26,6 +28,7 @@ export default function RootLayout() {
         {/* Modals */}
         <Stack.Screen name="modals/add-link" options={{ presentation: 'modal', headerShown: false }} />
       </Stack>
+      </DockProvider>
     </AuthProvider>
   );
 }

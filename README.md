@@ -46,3 +46,19 @@ node --loader ts-node/esm tests/canonicalize.test.ts
 - `FlatList` with `pagingEnabled` for vertical swipe.
 - Add Link modal calls `unfurl`, which invokes `classify`.
 - Deep link attempts native apps; falls back to web.
+
+### Home Screen Architecture (v2)
+
+- HeroGrid: 2x2 virtualized grid using `FlatList` with infinite scroll.
+- PostCard: lazy-loaded `expo-image` with overlay title and long-press quick action.
+- Search & Filters:
+  - `SearchBar` with 250ms debounce, clear button.
+  - `ChipList` multi-select; selections persist when docked.
+  - `usePosts` hook handles pagination, tag filter, simple search.
+- Docking:
+  - `useDockState` context exposes `isDocked`, `dock`, `undock`.
+  - `DockedSearchRail` replaces TabBar on the Home screen when docked.
+  - Motion utilities in `utils/motion.ts` respect Reduce Motion.
+- Analytics: `lib/analytics.ts` logs `home_view`, `grid_scroll`, `search_query`, `filter_select`, `dock_state_change`.
+
+Extending filters: add tags in `supabase/schema.sql` enum and `lib/supabase.ts` `TAGS` list; `ChipList` reads from that list automatically.
