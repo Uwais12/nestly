@@ -89,8 +89,8 @@ export function UniversalPlayer({ url, platform, thumbnail, active = true, heigh
 }
 
 const styles = StyleSheet.create({
-  box: { borderRadius: theme.radius, overflow: 'hidden', backgroundColor: '#000', borderWidth: 1, borderColor: theme.colors.glassStroke },
-  web: { borderRadius: theme.radius },
+  box: {  overflow: 'hidden' },
+  // web: { borderRadius: theme.radius },
   center: { alignItems: 'center', justifyContent: 'center' },
   fallback: { color: theme.colors.textMuted, padding: 12, textAlign: 'center' },
   loadingText: { marginTop: 8, color: theme.colors.textMuted, fontSize: 12 },

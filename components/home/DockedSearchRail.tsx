@@ -1,19 +1,32 @@
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
-import { useEffect } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { useEffect, useState } from 'react';
+import { Keyboard, Platform, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { theme } from '@/constants/theme';
 import { TAB_BAR_HEIGHT, TAB_BAR_MARGIN } from '@/constants/layout';
 import { SearchBar } from '@/components/home/SearchBar';
 import { ChipList } from '@/components/home/ChipList';
 
-export function DockedSearchRail({ visible, query, onQuery, selected, onToggle }: { visible: boolean; query: string; onQuery: (q: string) => void; selected: string[]; onToggle: (t: string) => void; }) {
+export function DockedSearchRail({ visible, query, onQuery, selected, onToggle, forceVisible = false }: { visible: boolean; query: string; onQuery: (q: string) => void; selected: string[]; onToggle: (t: string) => void; forceVisible?: boolean; }) {
   const insets = useSafeAreaInsets();
   const y = useSharedValue(100);
+  const [keyboardOffset, setKeyboardOffset] = useState(0);
 
   useEffect(() => {
-    y.value = withTiming(visible ? 0 : 120, { duration: 200 });
-  }, [visible, y]);
+    y.value = withTiming((visible || forceVisible) ? 0 : 120, { duration: 200 });
+  }, [visible, forceVisible, y]);
+
+  // Keep the rail above the keyboard when editing
+  useEffect(() => {
+    const show = Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow';
+    const hide = Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide';
+    const s = Keyboard.addListener(show, (e) => {
+      const h = e?.endCoordinates?.height ?? 0;
+      setKeyboardOffset(h);
+    });
+    const hSub = Keyboard.addListener(hide, () => setKeyboardOffset(0));
+    return () => { try { s.remove(); } catch {} try { hSub.remove(); } catch {} };
+  }, []);
 
   const style = useAnimatedStyle(() => ({ transform: [{ translateY: y.value }] }));
 
@@ -21,11 +34,11 @@ export function DockedSearchRail({ visible, query, onQuery, selected, onToggle }
     <Animated.View style={[
       styles.wrap,
       style,
-      { paddingBottom: Math.max(insets.bottom, 8), bottom: TAB_BAR_HEIGHT + TAB_BAR_MARGIN + 10 }
+      { paddingBottom: Math.max(insets.bottom, 8), bottom: TAB_BAR_HEIGHT + TAB_BAR_MARGIN + 10 + keyboardOffset }
     ]}
-      pointerEvents={visible ? 'auto' : 'none'}
-      accessibilityElementsHidden={!visible}
-      importantForAccessibility={visible ? 'yes' : 'no-hide-descendants'}
+      pointerEvents={(visible || forceVisible) ? 'auto' : 'none'}
+      accessibilityElementsHidden={!(visible || forceVisible)}
+      importantForAccessibility={(visible || forceVisible) ? 'yes' : 'no-hide-descendants'}
     >
       <SearchBar value={query} onChange={onQuery} compact />
       <View style={{ height: 8 }} />

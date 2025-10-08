@@ -11,7 +11,7 @@ export default function RootLayout() {
   return (
     <AuthProvider>
       {/* Global default; individual screens can override */}
-      <StatusBar style="light" animated />
+      <StatusBar style="dark" animated />
       <ShareBootstrapper />
       <DockProvider>
       <Stack screenOptions={{ headerShown: false }}>

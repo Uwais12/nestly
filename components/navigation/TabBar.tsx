@@ -26,7 +26,7 @@ export function TabBar({ state, navigation }: BottomTabBarProps) {
 
   return (
     <BlurView
-      intensity={28}
+      intensity={24}
       tint="light"
       style={[
         styles.wrap,

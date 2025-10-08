@@ -28,6 +28,8 @@ export default function AllScreen() {
 
   // Grid scroll docking behavior will be refined with onScroll later
 
+  const [scrollable, setScrollable] = useState(true);
+
   return (
     <SafeAreaView style={styles.container}>
       <LinearGradient colors={[theme.colors.accentPurple, theme.colors.accentCyan, theme.colors.accentOrange]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={styles.accent} />
@@ -36,6 +38,7 @@ export default function AllScreen() {
         onEndReached={loadMore}
         onOpen={(id: string) => router.push(`/item/${id}`)}
         startAtEnd
+        onScrollableChange={setScrollable}
         onScroll={(e) => {
           const y = e.nativeEvent.contentOffset.y;
           const v = e.nativeEvent.velocity?.y ?? 0;
@@ -50,7 +53,7 @@ export default function AllScreen() {
       {/* Listen to scroll to toggle dock state if needed (grid is primary scroller) */}
       {/* In practice we could elevate this to a custom FlatList onScroll prop; simplified here */}
       {/* No-op: using threshold logic managed elsewhere */}
-      <DockedSearchRail visible={isDocked} query={query} onQuery={(q) => { setQuery(q); logEvent('search_query', { q }); }} selected={selected} onToggle={onToggle} />
+      <DockedSearchRail visible={isDocked} forceVisible={!scrollable} query={query} onQuery={(q) => { setQuery(q); logEvent('search_query', { q }); }} selected={selected} onToggle={onToggle} />
     </SafeAreaView>
   );
 }
