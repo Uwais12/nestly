@@ -4,8 +4,9 @@ import { DockProvider } from '@/hooks/useDockState';
 import { StatusBar } from 'expo-status-bar';
 import { AuthProvider } from '@/hooks/useSession';
 import { useShareCapture } from '@/hooks/useShareCapture';
+import { useShareHandler } from '@/hooks/useShareHandler';
 
-function ShareBootstrapper() { useShareCapture(); return null; }
+function ShareBootstrapper() { useShareCapture(); useShareHandler(); return null; }
 
 export default function RootLayout() {
   return (

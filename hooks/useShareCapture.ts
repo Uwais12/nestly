@@ -1,5 +1,6 @@
 import { useEffect, useRef, useCallback } from 'react';
 import { Alert } from 'react-native';
+import * as Linking from 'expo-linking';
 import { useRouter } from 'expo-router';
 import { useSession } from '@/hooks/useSession';
 
@@ -25,11 +26,50 @@ export function useShareCapture(onHandled?: Handler) {
     onHandled?.({ url: textOrUrl, fromBackground, text: undefined });
   }, [session?.user?.id, router]);
 
+  function extractUrlFromSharedItems(items: any[] | null | undefined): string | null {
+    if (!items || !Array.isArray(items) || items.length === 0) return null;
+    const tryParseJson = (val: string): any => {
+      try { return JSON.parse(val); } catch { return null; }
+    };
+    for (const item of items) {
+      const dataArr = Array.isArray(item?.data) ? item.data : [];
+      for (const entry of dataArr) {
+        if (typeof entry === 'string') {
+          // Direct URL
+          if (/^https?:\/\//i.test(entry)) return entry;
+          // Possibly JSON-encoded array/object
+          if (/^[\[{]/.test(entry)) {
+            const parsed = tryParseJson(entry);
+            if (Array.isArray(parsed)) {
+              // Array of strings or objects
+              for (const p of parsed) {
+                if (typeof p === 'string' && /^https?:\/\//i.test(p)) return p;
+                if (p && typeof p === 'object' && typeof p.url === 'string' && /^https?:\/\//i.test(p.url)) return p.url;
+              }
+            } else if (parsed && typeof parsed === 'object' && typeof parsed.url === 'string') {
+              if (/^https?:\/\//i.test(parsed.url)) return parsed.url;
+            }
+          }
+        } else if (entry && typeof entry === 'object') {
+          // Object with url field
+          if (typeof entry.url === 'string' && /^https?:\/\//i.test(entry.url)) return entry.url;
+          if (typeof entry.uri === 'string' && /^https?:\/\//i.test(entry.uri)) return entry.uri;
+        }
+      }
+    }
+    return null;
+  }
+
   // Cold start (app launched from share). Guard for environments where expo-share-intent
   // is not available (simulators without extension, web, or release builds without the module).
   useEffect(() => {
     (async () => {
       try {
+        // If we were launched via our own deep link, let the deep-link handler manage it
+        const initialUrl = await Linking.getInitialURL();
+        if (typeof initialUrl === 'string' && initialUrl.startsWith('nestly://')) {
+          return;
+        }
         // Dynamically require to avoid bundling/runtime errors on unsupported platforms
         // eslint-disable-next-line @typescript-eslint/no-var-requires
         const ShareIntent = require('expo-share-intent');
@@ -37,14 +77,10 @@ export function useShareCapture(onHandled?: Handler) {
         const clearSharedData: undefined | (() => Promise<void>) = ShareIntent?.clearSharedData;
         if (typeof getSharedData === 'function') {
           const initial = await getSharedData();
-          if (initial?.length) {
-            const first = initial[0];
-            const dataArr = Array.isArray(first?.data) ? first.data : [];
-            const textOrUrl = typeof dataArr[0] === 'string' ? dataArr[0] : undefined;
-            if (textOrUrl) await saveUrlOrDefer(textOrUrl, true);
-            if (typeof clearSharedData === 'function') {
-              await clearSharedData();
-            }
+          const maybeUrl = extractUrlFromSharedItems(initial);
+          if (maybeUrl) await saveUrlOrDefer(maybeUrl, true);
+          if (initial && typeof clearSharedData === 'function') {
+            await clearSharedData();
           }
         }
       } catch {
@@ -63,12 +99,8 @@ export function useShareCapture(onHandled?: Handler) {
         ShareIntent?.addListener;
       if (typeof addListener === 'function') {
         const sub = addListener(async (items) => {
-          const arr = (items ?? undefined) as any[] | undefined;
-          if (!arr?.length) return;
-          const first = arr[0];
-          const dataArr = Array.isArray(first?.data) ? first.data : [];
-          const textOrUrl = typeof dataArr[0] === 'string' ? dataArr[0] : undefined;
-          if (textOrUrl) await saveUrlOrDefer(textOrUrl, false);
+          const maybeUrl = extractUrlFromSharedItems(items ?? undefined);
+          if (maybeUrl) await saveUrlOrDefer(maybeUrl, false);
         });
         remove = () => { try { sub.remove(); } catch {} };
       }
