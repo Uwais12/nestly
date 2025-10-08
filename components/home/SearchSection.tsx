@@ -27,8 +27,8 @@ export function SearchSection({
 }
 
 const styles = StyleSheet.create({
-  wrap: { paddingHorizontal: 16, paddingTop: 8, paddingBottom: 16, backgroundColor: theme.colors.bg },
-  title: { fontSize: 22, fontWeight: '600', letterSpacing: 0.2 },
+  wrap: { paddingHorizontal: 16, paddingTop: 12, paddingBottom: 12, backgroundColor: theme.colors.bg, borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: theme.colors.border },
+  title: { fontSize: 22, fontWeight: '700', letterSpacing: 0.1, color: theme.colors.text },
 });
 
 

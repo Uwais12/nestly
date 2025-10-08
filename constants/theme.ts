@@ -28,6 +28,11 @@ export const theme = {
     elevatedBg: 'rgba(255,255,255,0.75)',
     glassStroke: 'rgba(0,0,0,0.06)',
     glassBg: 'rgba(255,255,255,0.80)',
+
+    // Accents (inspired by app icon)
+    accentPurple: '#7D5CFF',
+    accentCyan: '#4AD8E8',
+    accentOrange: '#FF9D4D',
   },
   radius: 16,
   radiusMd: 12,

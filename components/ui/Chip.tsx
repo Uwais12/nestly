@@ -22,9 +22,9 @@ export function Chip({ title, onPress, variant = 'solid', style }: { title: stri
 const styles = StyleSheet.create({
   base: { paddingHorizontal: theme.chip.padH, paddingVertical: theme.chip.padV, borderRadius: theme.chip.radius, alignSelf: 'flex-start' },
   solid: { backgroundColor: theme.colors.brand },
-  solidText: { color: '#0B0D10', fontWeight: '700', fontSize: 14 },
-  glass: { backgroundColor: 'rgba(255,255,255,0.08)', borderWidth: 1, borderColor: theme.colors.glassStroke },
-  glassText: { color: theme.colors.text, fontWeight: '600', fontSize: 14 },
+  solidText: { color: '#0B0D10', fontWeight: '800', fontSize: 14 },
+  glass: { backgroundColor: theme.colors.card, borderWidth: 1, borderColor: theme.colors.border },
+  glassText: { color: theme.colors.text, fontWeight: '700', fontSize: 14 },
 });
 
 

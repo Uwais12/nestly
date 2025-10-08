@@ -20,14 +20,14 @@ export function Button({ title, onPress, loading, variant = 'filled', size = 'md
       border: theme.colors.brand,
     },
     subtle: {
-      bg: 'rgba(255,255,255,0.06)',
+      bg: theme.colors.card,
       color: theme.colors.text,
-      border: 'rgba(255,255,255,0.10)',
+      border: theme.colors.border,
     },
     ghost: {
       bg: 'transparent',
       color: theme.colors.text,
-      border: 'rgba(255,255,255,0.14)',
+      border: theme.colors.border,
     },
   } as const;
 

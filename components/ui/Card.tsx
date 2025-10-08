@@ -11,7 +11,7 @@ export function Card({ children, style, ...rest }: PropsWithChildren<ViewProps>)
 }
 
 const styles = StyleSheet.create({
-  card: { backgroundColor: theme.colors.card, borderRadius: theme.radius, borderWidth: 1, borderColor: 'rgba(255,255,255,0.08)' },
+  card: { backgroundColor: theme.colors.card, borderRadius: theme.radius, borderWidth: 1, borderColor: theme.colors.border },
 });
 
 

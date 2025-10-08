@@ -30,6 +30,7 @@ serve(async (req) => {
     }
 
     const text = [title, caption, (hashtags ?? []).join(' ')].filter(Boolean).join(' ');
+    let shortTitle: string | null = null;
 
     let results: { tag: Tag; confidence: number }[] = [];
     const OPENAI_API_KEY = Deno.env.get('OPENAI_API_KEY');
@@ -72,6 +73,24 @@ serve(async (req) => {
           .filter((r: any) => TAGS.includes(r?.tag) && r?.tag !== 'Inbox')
           .map((r: any) => ({ tag: r.tag as Tag, confidence: Number(r?.confidence ?? 0) }));
       }
+      // Also ask for a very short 3-5 word title
+      try {
+        const titlePrompt = {
+          model: 'gpt-4o-mini',
+          messages: [
+            { role: 'system', content: 'Write a concise, catchy 3-5 word title for a saved social video. No punctuation beyond basic capitalization. Return ONLY the title text.' },
+            { role: 'user', content: text || (title ?? '') },
+          ],
+        };
+        const tResp = await fetch('https://api.openai.com/v1/chat/completions', {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${OPENAI_API_KEY}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify(titlePrompt),
+        });
+        const tJson = await tResp.json().catch(() => ({} as any));
+        const tContent = (tJson?.choices?.[0]?.message?.content ?? '').trim();
+        if (tContent) shortTitle = tContent.slice(0, 80);
+      } catch {}
     } else if (OPENAI_API_KEY) {
       console.warn('OPENAI_API_KEY appears invalid (expected to start with "sk-"). Falling back to rules.');
     } // else no key set — silently fall back to rules
@@ -104,6 +123,9 @@ serve(async (req) => {
     if (itemId) {
       const rows = results.map((r) => ({ item_id: itemId, tag: r.tag, confidence: r.confidence }));
       await supabase.from('item_tags').upsert(rows, { onConflict: 'item_id,tag' });
+      if (shortTitle) {
+        await supabase.from('items').update({ short_title: shortTitle }).eq('id', itemId);
+      }
     }
 
     return new Response(JSON.stringify(results), { headers: { 'Content-Type': 'application/json' } });

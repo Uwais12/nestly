@@ -12,14 +12,14 @@ export function Glass({ children, style, ...rest }: PropsWithChildren<ViewProps>
 
 const styles = StyleSheet.create({
   glass: {
-    backgroundColor: theme.colors.elevatedBg,
+    backgroundColor: theme.colors.glassBg,
     borderWidth: 1,
     borderColor: theme.colors.glassStroke,
     borderRadius: theme.radius,
     shadowColor: '#000',
-    shadowOpacity: 0.25,
-    shadowRadius: 12,
-    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.14,
+    shadowRadius: 10,
+    shadowOffset: { width: 0, height: 6 },
   },
 });
 

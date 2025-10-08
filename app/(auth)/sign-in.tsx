@@ -200,7 +200,7 @@ const styles = StyleSheet.create({
   heroTitle: { fontSize: 28 },
   card: { alignSelf: 'stretch', padding: theme.spacing(2), gap: theme.spacing(2) },
   formRow: { alignSelf: 'stretch' },
-  input: { borderWidth: 1, borderColor: theme.colors.border, borderRadius: theme.radius, padding: 14, fontSize: 16, backgroundColor: '#0E1115', color: theme.colors.text },
+  input: { borderWidth: 1, borderColor: theme.colors.border, borderRadius: theme.radius, padding: 14, fontSize: 16, backgroundColor: theme.colors.surface, color: theme.colors.text },
   button: { marginTop: 8, backgroundColor: theme.colors.brand, paddingVertical: 14, paddingHorizontal: 22, borderRadius: theme.radius, alignSelf: 'stretch', alignItems: 'center' },
   buttonText: { color: '#0B0D10', fontWeight: '800', fontSize: 14 },
   secondaryBtn: { paddingVertical: 12 },

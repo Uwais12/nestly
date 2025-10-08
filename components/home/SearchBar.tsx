@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Pressable, StyleSheet, TextInput, View } from 'react-native';
 import { theme } from '@/constants/theme';
 import { IconSymbol } from '@/components/ui/icon-symbol';
@@ -16,10 +16,10 @@ export function SearchBar({ value, onChange, compact = false }: { value: string;
   }, [text, onChange]);
 
   const height = compact ? 40 : 52;
-  const radius = compact ? 24 : 28;
+  const radius = compact ? 20 : 22;
 
   return (
-    <View style={[styles.wrap, { height, borderRadius: radius, shadowOpacity: compact ? 0.12 : 0.16 }]}> 
+    <View style={[styles.wrap, { height, borderRadius: radius, shadowOpacity: compact ? 0.08 : 0.12 }]}> 
       <IconSymbol name="magnifyingglass" size={18} color={theme.colors.textFaint} style={{ marginLeft: 12 }} />
       <TextInput
         value={text}
@@ -39,8 +39,8 @@ export function SearchBar({ value, onChange, compact = false }: { value: string;
 }
 
 const styles = StyleSheet.create({
-  wrap: { flexDirection: 'row', alignItems: 'center', backgroundColor: theme.colors.surface, borderWidth: 1, borderColor: theme.colors.border, paddingRight: 8, shadowColor: '#000', shadowRadius: 12, shadowOffset: { width: 0, height: 8 } },
-  input: { flex: 1, color: theme.colors.text, fontSize: 16, paddingHorizontal: 10 },
+  wrap: { flexDirection: 'row', alignItems: 'center', backgroundColor: theme.colors.surface, borderWidth: 1, borderColor: theme.colors.border, paddingRight: 8, shadowColor: '#000', shadowRadius: 10, shadowOffset: { width: 0, height: 6 } },
+  input: { flex: 1, color: theme.colors.text, fontSize: 16, paddingHorizontal: 10, includeFontPadding: false },
   clear: { padding: 8 },
 });
 

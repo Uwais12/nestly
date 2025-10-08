@@ -3,22 +3,21 @@ import { useSession } from '@/hooks/useSession';
 import { HapticTab } from '@/components/haptic-tab';
 import { theme } from '@/constants/theme';
 import { TabBar } from '@/components/navigation/TabBar';
-import { useDockState } from '@/hooks/useDockState';
+// import { useDockState } from '@/hooks/useDockState';
 
 export default function TabLayout() {
   const { session } = useSession();
-  const { isDocked } = useDockState();
   if (!session) return <Redirect href="/(auth)/sign-in" />;
 
   return (
     <Tabs
       // 👇 custom bar lives here, not inside screenOptions
-      tabBar={(props) => (isDocked ? null : <TabBar {...props} />)}
+      tabBar={(props) => (<TabBar {...props} />)}
       screenOptions={{
         headerShown: false,
         tabBarShowLabel: false,
         tabBarActiveTintColor: theme.colors.brand,
-        tabBarStyle: { backgroundColor: 'transparent', borderTopColor: 'transparent' },
+        tabBarStyle: { backgroundColor: 'transparent', borderTopColor: 'transparent'},
         tabBarButton: HapticTab,
       }}
     >

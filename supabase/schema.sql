@@ -15,6 +15,7 @@ create table if not exists public.items (
   url text not null,
   platform text,
   title text,
+  short_title text,
   caption text,
   author text,
   thumbnail_url text,
@@ -38,7 +39,7 @@ create table if not exists public.notes (
 );
 
 create index if not exists items_text_idx on public.items using gin
-  (to_tsvector('simple', coalesce(title,'') || ' ' || coalesce(caption,'') || ' ' || coalesce(author,'')));
+  (to_tsvector('simple', coalesce(short_title,'') || ' ' || coalesce(title,'') || ' ' || coalesce(caption,'') || ' ' || coalesce(author,'')));
 
 alter table public.items enable row level security;
 alter table public.item_tags enable row level security;

@@ -6,6 +6,7 @@ export type Post = {
   id: string;
   url: string;
   title: string | null;
+  short_title: string | null;
   author: string | null;
   thumbnail_url: string | null;
   created_at: string;
@@ -48,7 +49,7 @@ export function usePosts({ tags, search, pageSize = 24 }: FetchParams) {
       if (search.trim().length) {
         // Simple ILIKE across selected fields to respect index; fallback if Postgres fts is not configured in client
         const term = `%${search.toLowerCase()}%`;
-        query = query.ilike('title', term);
+        query = query.or(`short_title.ilike.${term},title.ilike.${term}`);
       }
 
       if (tags.length) {
@@ -71,7 +72,7 @@ export function usePosts({ tags, search, pageSize = 24 }: FetchParams) {
     } finally {
       setLoading(false);
     }
-  }, [session?.user?.id, tagsKey, search, pageSize]);
+  }, [session?.user?.id, tagsKey, tags, search, pageSize]);
 
   const loadMore = useCallback(async () => {
     if (!session?.user?.id || loading || !hasMore) return;
@@ -85,7 +86,7 @@ export function usePosts({ tags, search, pageSize = 24 }: FetchParams) {
         .eq('user_id', session.user.id)
         .order('created_at', { ascending: false })
         .range(from, to);
-      if (search.trim().length) query = query.ilike('title', `%${search.toLowerCase()}%`);
+      if (search.trim().length) query = query.or(`short_title.ilike.%${search.toLowerCase()}%,title.ilike.%${search.toLowerCase()}%`);
       if (tags.length) {
         query = supabase
           .from('items')
