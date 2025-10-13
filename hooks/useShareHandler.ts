@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import * as Linking from 'expo-linking';
 import { Alert, Platform } from 'react-native';
 import { useRouter } from 'expo-router';
+import { parseIncomingShare } from '@/lib/deeplinks';
 import { useSession } from '@/hooks/useSession';
 
 function getQueryParam(url: string, key: string): string | null {
@@ -20,23 +21,8 @@ export function useShareHandler() {
   useEffect(() => {
     async function handleDeepLink(url: string | null) {
       if (!url) return;
-      // Accept multiple shapes:
-      // - nestly://shared?url=ENCODED_URL (preferred)
-      // - nestly://dataUrl=nestlyShareKey (legacy)
-      // - nestly://?url=ENCODED_URL
-      let sharedUrl: string | null = null;
-      let hasDataUrlKey = false;
-      try {
-        const u = new URL(url);
-        if (u.host === 'shared') {
-          sharedUrl = u.searchParams.get('url');
-        }
-        if (!sharedUrl) {
-          // legacy: dataUrl or url at root
-          sharedUrl = u.searchParams.get('url') || u.searchParams.get('dataUrl');
-          hasDataUrlKey = !!u.searchParams.get('dataUrl') && !u.searchParams.get('url');
-        }
-      } catch {}
+      const { directUrl, hasDataUrlKey } = parseIncomingShare(url);
+      let sharedUrl: string | null = directUrl ?? null;
       if (!sharedUrl && !hasDataUrlKey) return;
 
       if (!session) {
