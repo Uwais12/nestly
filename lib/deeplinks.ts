@@ -35,3 +35,37 @@ export function toDeepLink(url: string): string {
 }
 
 
+// Parse incoming app deep links created by share extensions or native share handlers.
+// Supported shapes:
+//  - nestly://shared?url=ENCODED_URL
+//  - nestly://?url=ENCODED_URL
+//  - nestly://?dataUrl=SHARED_KEY
+//  - nestly://dataUrl=SHARED_KEY (legacy host-based without '?')
+export function parseIncomingShare(url: string): { directUrl?: string; hasDataUrlKey: boolean } {
+  let directUrl: string | undefined;
+  let hasDataUrlKey = false;
+  try {
+    const u = new URL(url);
+    if (u.host === 'shared') {
+      directUrl = u.searchParams.get('url') ?? undefined;
+    }
+    if (!directUrl) {
+      const qpUrl = u.searchParams.get('url');
+      const qpData = u.searchParams.get('dataUrl');
+      directUrl = qpUrl ?? undefined;
+      hasDataUrlKey = !!qpData && !qpUrl;
+    }
+    if (!directUrl && !hasDataUrlKey) {
+      const raw = url.replace(/^nestly:\/\//, '');
+      const beforeHash = raw.split('#')[0];
+      if (beforeHash.startsWith('dataUrl=')) {
+        hasDataUrlKey = true;
+      }
+    }
+  } catch {
+    // ignore
+  }
+  return { directUrl, hasDataUrlKey };
+}
+
+

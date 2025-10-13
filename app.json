@@ -2,7 +2,7 @@
   "expo": {
     "name": "nestly",
     "slug": "nestly",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/images/NestlyAppIcons/light/icon2_1024x1024.png",
     "scheme": "nestly",
@@ -11,12 +11,14 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.nestly.app",
+      "buildNumber": "2",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {
       "package": "com.nestly.app",
+      "versionCode": 2,
       "adaptiveIcon": {
         "backgroundColor": "#000000",
         "foregroundImage": "./assets/images/NestlyAppIcons/light/icon_180x180.png",
