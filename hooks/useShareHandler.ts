@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import * as Linking from 'expo-linking';
-import { Alert, Platform } from 'react-native';
+import { Platform } from 'react-native';
 import { useRouter } from 'expo-router';
 import Constants, { ExecutionEnvironment } from 'expo-constants';
 import { parseIncomingShare } from '@/lib/deeplinks';
@@ -11,93 +11,117 @@ export function useShareHandler() {
   const { session } = useSession();
 
   useEffect(() => {
+    // If no session, we can't do anything useful with shares anyway
+    if (!session) return;
+
     async function handleDeepLink(url: string | null) {
       if (!url) return;
+      console.log('[ShareHandler] Incoming URL:', url);
+      
       const { directUrl, hasDataUrlKey } = parseIncomingShare(url);
       let sharedUrl: string | null = directUrl ?? null;
-      if (!sharedUrl && !hasDataUrlKey) return;
 
-      if (!session) {
-        Alert.alert('Sign in required', 'Please sign in to save shares.');
-        router.replace('/(auth)/sign-in');
+      // Case 1: URL is explicitly in query param (e.g. nestly://?url=...)
+      if (sharedUrl) {
+        console.log('[ShareHandler] Direct URL found:', sharedUrl);
+        router.push(`/modals/add-link?url=${encodeURIComponent(sharedUrl)}`);
         return;
       }
 
-      // If the deep link provided a dataUrl key (expo-share-intent style), fetch the actual shared data now
-      if (!sharedUrl && hasDataUrlKey) {
-        try {
-          // eslint-disable-next-line @typescript-eslint/no-var-requires
-          const ShareIntent = require('expo-share-intent');
-          const getSharedData = ShareIntent?.getSharedData as undefined | (() => Promise<any[] | null>);
-          const clearSharedData = ShareIntent?.clearSharedData as undefined | (() => Promise<void>);
-          if (typeof getSharedData === 'function') {
-            const items = await getSharedData();
-            const first = items && items[0];
-            const dataArr = Array.isArray(first?.data) ? first.data : [];
-            const textOrUrl = typeof dataArr[0] === 'string' ? dataArr[0] : undefined;
-            if (textOrUrl) sharedUrl = textOrUrl;
-            if (typeof clearSharedData === 'function') await clearSharedData();
-          }
-        } catch {}
+      // Case 2: URL requires fetching from Shared Group Storage (iOS Share Extension)
+      if (hasDataUrlKey) {
+         // expo-share-intent works by reading from a shared App Group container
+         // The deep link usually looks like scheme://?dataUrl=someKey
+         // We need to use the native module to read that key.
+         if (Platform.OS === 'ios' || Platform.OS === 'android') {
+            try {
+              // eslint-disable-next-line @typescript-eslint/no-var-requires
+              const ShareIntent = require('expo-share-intent');
+              if (ShareIntent && ShareIntent.getSharedData) {
+                 const items = await ShareIntent.getSharedData();
+                 console.log('[ShareHandler] Shared items:', items);
+                 
+                 // We look for the first valid web URL or text
+                 const first = items?.[0];
+                 if (first) {
+                   // expo-share-intent structure usually: { type: 'weburl' | 'text', value: '...' } or similar depending on fork
+                   // Based on your ShareViewController.swift:
+                   // It saves JSON arrays like [{ url: '...', meta: '...' }] or ["some text"]
+                   
+                   let extractedUrl: string | null = null;
+                   
+                   // Check if it's the weburl structure from Swift
+                   if (first.url && typeof first.url === 'string') {
+                      extractedUrl = first.url;
+                   } 
+                   // Check if it's just a string (text share)
+                   else if (typeof first === 'string') {
+                      extractedUrl = first;
+                   }
+                   // Check native module 'data' property if specific shape
+                   else if (first.data && typeof first.data === 'string') {
+                      // sometimes simple text
+                      extractedUrl = first.data;
+                   }
+
+                   if (extractedUrl) {
+                      // Clean up the native storage
+                      if (ShareIntent.clearSharedData) {
+                         await ShareIntent.clearSharedData();
+                      }
+                      router.push(`/modals/add-link?url=${encodeURIComponent(extractedUrl)}`);
+                      return;
+                   }
+                 }
+              }
+            } catch (e) {
+               console.warn('[ShareHandler] Error reading share intent:', e);
+            }
+         }
       }
-
-      if (!sharedUrl) return;
-
-      // Navigate to Add Link modal with prefilled URL instead of auto-saving
-      router.push(`/modals/add-link?url=${encodeURIComponent(sharedUrl)}`);
     }
 
-    // Runtime URL events
+    // --- 1. Handle App Launch with URL ---
+    Linking.getInitialURL().then((url) => {
+       if (url) handleDeepLink(url);
+    });
+
+    // --- 2. Handle Runtime URL events ---
     const sub = Linking.addEventListener('url', (ev) => handleDeepLink(ev.url));
 
+    // --- 3. Native Module Fallback (if not using expo-share-intent managed workflow) ---
+    // Only run this check if NOT in Expo Go
     const isExpoGo = Constants.executionEnvironment === ExecutionEnvironment.StoreClient;
-
-    if (Platform.OS !== 'web' && !isExpoGo) {
-      // Optional: react-native-share-menu fallback for native share intents
-      // This requires native integration. We try to call it if available.
-      try {
-        // eslint-disable-next-line @typescript-eslint/no-var-requires
-        const ShareMenu = require('react-native-share-menu');
-        const pickUrlFromShare = (share: any): string | null => {
-          if (!share) return null;
-          // Common structures: { data: string } or { data: [{ mimeType, data }, ...] }
-          const data = share?.data;
-          if (typeof data === 'string') return data;
-          if (Array.isArray(data)) {
-            const textEntry = data.find((d: any) => typeof d?.data === 'string');
-            if (textEntry?.data) return textEntry.data;
-            const uriEntry = data.find((d: any) => typeof d?.data?.uri === 'string');
-            if (uriEntry?.data?.uri) return uriEntry.data.uri;
+    if (!isExpoGo && Platform.OS !== 'web') {
+       try {
+          // eslint-disable-next-line @typescript-eslint/no-var-requires
+          const ShareMenu = require('react-native-share-menu');
+          if (ShareMenu) {
+             ShareMenu.getInitialShare((share: any) => {
+                if (share?.data) {
+                   // normalize
+                   const data = typeof share.data === 'string' ? share.data : share.data[0]?.data;
+                   if (data && typeof data === 'string' && data.startsWith('http')) {
+                      router.push(`/modals/add-link?url=${encodeURIComponent(data)}`);
+                   }
+                }
+             });
+             ShareMenu.addNewShareListener((share: any) => {
+                if (share?.data) {
+                   const data = typeof share.data === 'string' ? share.data : share.data[0]?.data;
+                   if (data && typeof data === 'string' && data.startsWith('http')) {
+                      router.push(`/modals/add-link?url=${encodeURIComponent(data)}`);
+                   }
+                }
+             });
           }
-          return null;
-        };
-        if (ShareMenu?.getInitialShare) {
-          ShareMenu.getInitialShare(async (share: any) => {
-            const maybeUrl = pickUrlFromShare(share);
-            if (maybeUrl) await handleDeepLink(`nestly://shared?url=${encodeURIComponent(maybeUrl)}`);
-          });
-        }
-        let remove: any;
-        if (ShareMenu?.addNewShareListener) {
-          remove = ShareMenu.addNewShareListener(async (share: any) => {
-            const maybeUrl = pickUrlFromShare(share);
-            if (maybeUrl) await handleDeepLink(`nestly://shared?url=${encodeURIComponent(maybeUrl)}`);
-          });
-        }
-        return () => {
-          try { sub.remove(); } catch {}
-          try { remove?.(); } catch {}
-        };
-      } catch {
-        // Library not installed; ignore
-      }
+       } catch {
+          // Module not found, ignore
+       }
     }
 
-    // Initial URL (cold start)
-    Linking.getInitialURL().then(handleDeepLink);
-
     return () => {
-      try { sub.remove(); } catch {}
+      sub.remove();
     };
   }, [session, router]);
 }

@@ -11,7 +11,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { Redirect } from 'expo-router';
+import { Redirect, useRouter } from 'expo-router';
 import { supabase } from '@/lib/supabase';
 import { useSession } from '@/hooks/useSession';
 import { theme } from '@/constants/theme';
@@ -20,6 +20,7 @@ import { H1, Muted } from '@/components/ui/Typography';
 
 export default function SignInScreen() {
   const { session } = useSession();
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -108,6 +109,15 @@ export default function SignInScreen() {
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
     >
       <View style={styles.container}>
+        <View style={styles.navRow}>
+          <TouchableOpacity
+            onPress={() => router.replace('/')}
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+          >
+            <Text style={styles.navBack}>{'\u2190'} Home</Text>
+          </TouchableOpacity>
+        </View>
+
         <View style={styles.hero}>
           <H1 style={styles.heroTitle}>Welcome back</H1>
           <Muted>Save links. Watch later. Stay organized.</Muted>
@@ -219,6 +229,8 @@ export default function SignInScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: theme.spacing(3), gap: theme.spacing(2), backgroundColor: theme.colors.bg },
+  navRow: { alignSelf: 'stretch', marginBottom: theme.spacing(1) },
+  navBack: { color: theme.colors.textMuted, fontSize: 14 },
   hero: { alignItems: 'center', gap: 6, marginBottom: theme.spacing(2) },
   heroTitle: { fontSize: 28 },
   card: { alignSelf: 'stretch', padding: theme.spacing(2), gap: theme.spacing(2) },

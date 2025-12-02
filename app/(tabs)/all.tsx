@@ -1,8 +1,9 @@
 // app/(tabs)/all.tsx
 import { useEffect, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
+import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
 import { theme } from '@/constants/theme';
 import { useDockState } from '@/hooks/useDockState';
@@ -34,7 +35,28 @@ export default function AllScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <LinearGradient colors={[theme.colors.accentPurple, theme.colors.accentCyan, theme.colors.accentOrange]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={styles.accent} />
+      <View style={styles.header}>
+        <View style={styles.headerBrand}>
+          <View style={styles.headerIconShell}>
+            <Image
+              source={require('../../assets/images/NestlyAppIcons/light/icon_40x40.png')}
+              style={styles.headerIcon}
+              contentFit="contain"
+            />
+          </View>
+          <View>
+            <Text style={styles.headerTitle}>Nestly</Text>
+            <Text style={styles.headerSubtitle}>Save links. Watch later.</Text>
+          </View>
+        </View>
+      </View>
+
+      <LinearGradient
+        colors={[theme.colors.accentPurple, theme.colors.accentCyan, theme.colors.accentOrange]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+        style={styles.accent}
+      />
       
       {showEmpty ? (
         <View style={styles.emptyContainer}>
@@ -83,7 +105,59 @@ export default function AllScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: theme.colors.bg },
-  accent: { height: 3, alignSelf: 'stretch', marginHorizontal: 12, marginTop: 6, borderRadius: 3, backgroundColor: theme.colors.accentOrange },
-  emptyContainer: { flex: 1, alignItems: 'center', justifyContent: 'center', paddingBottom: 100 },
+  container: {
+    flex: 1,
+    backgroundColor: theme.colors.bg,
+  },
+  header: {
+    paddingTop: 8,
+    paddingHorizontal: 16,
+    paddingBottom: 8,
+  },
+  headerBrand: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+  },
+  headerIconShell: {
+    width: 32,
+    height: 32,
+    borderRadius: 999,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#000',
+    shadowOpacity: 0.12,
+    shadowRadius: 10,
+    shadowOffset: { width: 0, height: 6 },
+    elevation: 3,
+  },
+  headerIcon: {
+    width: 24,
+    height: 24,
+  },
+  headerTitle: {
+    fontSize: 18,
+    fontWeight: '700',
+    letterSpacing: -0.3,
+    color: theme.colors.text,
+  },
+  headerSubtitle: {
+    fontSize: 12,
+    color: theme.colors.textMuted,
+  },
+  accent: {
+    height: 3,
+    alignSelf: 'stretch',
+    marginHorizontal: 12,
+    marginTop: 4,
+    borderRadius: 3,
+    backgroundColor: theme.colors.accentOrange,
+  },
+  emptyContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingBottom: 100,
+  },
 });

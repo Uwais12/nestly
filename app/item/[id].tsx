@@ -66,13 +66,36 @@ export default function ItemDetails() {
     if (error) { Alert.alert('Error', error.message); }
   }
 
+  function confirmDelete() {
+    Alert.alert(
+      'Delete this item?',
+      'This will remove it from your Nestly list.',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Delete',
+          style: 'destructive',
+          onPress: async () => {
+            const { error } = await supabase.from('items').delete().eq('id', id);
+            if (error) {
+              Alert.alert('Error', error.message);
+              return;
+            }
+            router.back();
+          },
+        },
+      ]
+    );
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <IconButton name="chevron.backward" onPress={() => router.back()} />
         <View style={{ flexDirection: 'row', gap: 8 }}>
-        <IconButton name="square.and.arrow.up" onPress={() => Share.share({ message: item.url })} />
-        <IconButton name="arrowshape.turn.up.right" onPress={() => openNativeOrWeb(item.url)} />
+          <IconButton name="trash" onPress={confirmDelete} />
+          <IconButton name="square.and.arrow.up" onPress={() => Share.share({ message: item.url })} />
+          <IconButton name="arrowshape.turn.up.right" onPress={() => openNativeOrWeb(item.url)} />
         </View>
       </View>
 
