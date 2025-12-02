@@ -23,9 +23,64 @@ Nestly saves links from social platforms (TikTok, Instagram, YouTube) and lets y
 - App: `EXPO_PUBLIC_SUPABASE_URL`, `EXPO_PUBLIC_SUPABASE_ANON_KEY`.
 - Functions: `OPENAI_API_KEY` optional for multi-label zero-shot.
 
-## Development
-- Start: `nvm use 20 && npm i && npx expo start --tunnel`
-- Functions: see `supabase/functions/*`. Schema in `supabase/schema.sql`.
+## Development Workflow
+
+### 1. Run Locally
+This starts the Metro bundler and allows you to run the app in Expo Go (on your phone) or a simulator.
+```bash
+# Install dependencies
+npm install
+
+# Start the development server
+npx expo start
+# OR for a tunnel connection (better for testing on physical device over different networks)
+npx expo start --tunnel
+```
+*Scan the QR code with your phone (Camera app on iOS, Expo app on Android) to run.*
+
+### 2. Build for App Store (EAS)
+We use EAS Build to create the production binaries.
+
+**Prerequisites:**
+- You need an Expo account.
+- You need a paid Apple Developer account.
+
+```bash
+# 1. Login to EAS
+npx eas login
+
+# 2. Configure the build (if not already done)
+npx eas build:configure
+
+# 3. Run the build for iOS (Production)
+# This will handle certificates, provisioning profiles, and upload to TestFlight/App Store Connect.
+npx eas build --platform ios --profile production --auto-submit
+```
+
+### 3. Push to GitHub
+Standard git workflow.
+
+```bash
+# Check what files have changed
+git status
+
+# Add all changes
+git add .
+
+# Commit changes with a message
+git commit -m "Describe your changes here"
+
+# Push to the remote repository
+git push origin main
+```
+
+### 4. Supabase Functions
+If you edit code in `supabase/functions/`:
+```bash
+# Deploy functions to production
+npx supabase functions deploy unfurl
+npx supabase functions deploy classify
+```
 
 ## Tagging
 - Fallback rules in `rules/tags.ts` map keywords/hashtags to tags.

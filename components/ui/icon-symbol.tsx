@@ -23,6 +23,7 @@ const MAPPING = {
   'chevron.backward': 'chevron-left',
   'square.and.arrow.up': 'share',
   'arrowshape.turn.up.right': 'open-in-new',
+  'tray.fill': 'inbox',
 } as IconMapping;
 
 /**
