@@ -1,5 +1,5 @@
 import { Redirect, useRouter } from 'expo-router';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, StatusBar } from 'react-native';
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useSession } from '@/hooks/useSession';
@@ -18,15 +18,17 @@ export default function Index() {
 
   return (
     <View style={styles.container}>
+      <StatusBar barStyle="dark-content" />
+      {/* Background Orb */}
+      <LinearGradient
+        colors={[theme.colors.accentPurple, theme.colors.accentCyan]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={styles.orbBehind}
+      />
+
       <Glass style={styles.card}>
         <View style={styles.hero}>
-          <LinearGradient
-            colors={[theme.colors.accentPurple, theme.colors.accentCyan]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 1 }}
-            style={styles.orbBehind}
-          />
-
           <View style={styles.logoShell}>
             <LinearGradient
               colors={[theme.colors.accentPurple, theme.colors.accentCyan, theme.colors.accentOrange]}
@@ -58,8 +60,11 @@ export default function Index() {
 
         <View style={styles.actions}>
           <TouchableOpacity
-            activeOpacity={0.9}
-            onPress={() => router.push('/(auth)/sign-in')}
+            activeOpacity={0.8}
+            onPress={() => {
+               console.log("Get Started Pressed");
+               router.push('/(auth)/sign-in');
+            }}
             style={styles.buttonOuter}
           >
             <LinearGradient
@@ -84,9 +89,19 @@ export default function Index() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'rgba(248,249,253,0.98)',
+    backgroundColor: 'rgba(248,249,253,1)', // Ensure solid background
     alignItems: 'stretch',
     justifyContent: 'center',
+  },
+  orbBehind: {
+    position: 'absolute',
+    width: 420,
+    height: 320,
+    borderRadius: 999,
+    top: -160,
+    left: -60, // Center roughly
+    opacity: 0.35,
+    zIndex: 0, // Ensure it is behind
   },
   card: {
     flex: 1,
@@ -98,20 +113,13 @@ const styles = StyleSheet.create({
     gap: theme.spacing(3),
     alignItems: 'stretch',
     justifyContent: 'space-between',
-    backgroundColor: 'rgba(248,249,253,0.98)',
+    backgroundColor: 'transparent', // Glass handles background
+    zIndex: 1, // Ensure content is above orb
   },
   hero: {
     alignItems: 'center',
     gap: theme.spacing(3),
-    overflow: 'hidden',
-  },
-  orbBehind: {
-    position: 'absolute',
-    width: 420,
-    height: 320,
-    borderRadius: 999,
-    top: -160,
-    opacity: 0.35,
+    // overflow: 'hidden', // Removed to ensure shadows/rings aren't clipped if they expand
   },
   logoShell: {
     alignItems: 'center',
@@ -175,6 +183,7 @@ const styles = StyleSheet.create({
   actions: {
     width: '100%',
     gap: theme.spacing(2),
+    marginBottom: 20, // Add bottom margin for safety
   },
   buttonOuter: {
     borderRadius: 999,
