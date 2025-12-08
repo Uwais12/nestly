@@ -136,7 +136,7 @@ export default function AllScreen() {
 
       <DockedSearchRail
         visible={isDocked}
-        forceVisible={!scrollable || showEmpty}
+        forceVisible={!scrollable || showEmpty || query.length > 0 || selected.length > 0}
         query={query}
         onQuery={(q) => { setQuery(q); logEvent('search_query', { q }); }}
         selected={selected}
