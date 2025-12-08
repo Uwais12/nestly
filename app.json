@@ -2,7 +2,7 @@
   "expo": {
     "name": "nestly",
     "slug": "nestly",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "orientation": "portrait",
     "icon": "./assets/images/NestlyAppIcons/light/icon2_1024x1024.png",
     "scheme": "nestly",
