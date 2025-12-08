@@ -1,11 +1,11 @@
-import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import { ChipList } from '@/components/home/ChipList';
+import { SearchBar } from '@/components/home/SearchBar';
+import { TAB_BAR_HEIGHT, TAB_BAR_MARGIN } from '@/constants/layout';
+import { theme } from '@/constants/theme';
 import { useEffect, useState } from 'react';
 import { Keyboard, Platform, StyleSheet, View } from 'react-native';
+import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { theme } from '@/constants/theme';
-import { TAB_BAR_HEIGHT, TAB_BAR_MARGIN } from '@/constants/layout';
-import { SearchBar } from '@/components/home/SearchBar';
-import { ChipList } from '@/components/home/ChipList';
 
 export function DockedSearchRail({ visible, query, onQuery, selected, onToggle, forceVisible = false }: { visible: boolean; query: string; onQuery: (q: string) => void; selected: string[]; onToggle: (t: string) => void; forceVisible?: boolean; }) {
   const insets = useSafeAreaInsets();
@@ -34,14 +34,17 @@ export function DockedSearchRail({ visible, query, onQuery, selected, onToggle, 
     <Animated.View style={[
       styles.wrap,
       style,
-      { paddingBottom: Math.max(insets.bottom, 8), bottom: TAB_BAR_HEIGHT + TAB_BAR_MARGIN + 10 + keyboardOffset }
+      {
+        paddingBottom: Math.max(insets.bottom, 6),
+        bottom: TAB_BAR_HEIGHT + TAB_BAR_MARGIN + 12 + keyboardOffset,
+      }
     ]}
       pointerEvents={(visible || forceVisible) ? 'auto' : 'none'}
       accessibilityElementsHidden={!(visible || forceVisible)}
       importantForAccessibility={(visible || forceVisible) ? 'yes' : 'no-hide-descendants'}
     >
       <SearchBar value={query} onChange={onQuery} compact />
-      <View style={{ height: 8 }} />
+      <View style={{ height: 6 }} />
       <ChipList selected={selected} onToggle={onToggle} compact />
     </Animated.View>
   );
@@ -56,7 +59,8 @@ const styles = StyleSheet.create({
     borderRadius: 22,
     borderWidth: 1,
     borderColor: theme.colors.glassStroke,
-    padding: 12,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
     zIndex: 998,
     shadowColor: theme.colors.accentGlow,
     shadowOpacity: 0.28,

@@ -127,7 +127,7 @@ export default function Profile() {
               title={c.title}
               subtitle={`${c.collection_items?.[0]?.count ?? 0} posts`}
               accent={collectionPalette[idx % collectionPalette.length]}
-              onPress={() => nav('/collections')}
+              onPress={() => nav(`/collections/${c.id}`)}
             />
           ))
         )}

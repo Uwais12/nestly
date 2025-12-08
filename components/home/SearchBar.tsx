@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
-import { LinearGradient } from 'expo-linear-gradient';
-import { Pressable, StyleSheet, TextInput, View } from 'react-native';
-import { theme } from '@/constants/theme';
 import { IconSymbol } from '@/components/ui/icon-symbol';
+import { theme } from '@/constants/theme';
+import { LinearGradient } from 'expo-linear-gradient';
+import { useEffect, useRef, useState } from 'react';
+import { Pressable, StyleSheet, TextInput, View } from 'react-native';
 
 type Props = { value: string; onChange: (v: string) => void; compact?: boolean; placeholder?: string };
 

@@ -1,22 +1,23 @@
 // app/(tabs)/all.tsx
-import { useEffect, useMemo, useState } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
-import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
-import { LinearGradient } from 'expo-linear-gradient';
-import { useRouter } from 'expo-router';
+import { DockedSearchRail } from '@/components/home/DockedSearchRail';
+import { HeroGrid } from '@/components/home/HeroGrid';
+import { Button } from '@/components/ui/Button';
+import { Empty } from '@/components/ui/Empty';
+import { IconButton } from '@/components/ui/IconButton';
 import { theme } from '@/constants/theme';
 import { useDockState } from '@/hooks/useDockState';
 import { usePosts } from '@/hooks/usePosts';
-import { HeroGrid } from '@/components/home/HeroGrid';
-import { DockedSearchRail } from '@/components/home/DockedSearchRail';
 import { logEvent } from '@/lib/analytics';
-import { Empty } from '@/components/ui/Empty';
-import { Button } from '@/components/ui/Button';
-import { IconButton } from '@/components/ui/IconButton';
+import { LinearGradient } from 'expo-linear-gradient';
+import { useRouter } from 'expo-router';
+import { useEffect, useMemo, useState } from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function AllScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
+  const topInset = Math.max(insets.top - 6, 0);
   const { dock, undock, isDocked } = useDockState();
   const [query, setQuery] = useState('');
   const [selected, setSelected] = useState<string[]>([]);
@@ -67,7 +68,7 @@ export default function AllScreen() {
         />
       </View>
 
-      <View style={[styles.topBar, { paddingTop: insets.top + 12 }]}>
+      <View style={[styles.topBar, { paddingTop: topInset }]}>
         <View>
           <Text style={styles.kicker}>Your vault</Text>
           <Text style={styles.headerTitle}>Nestly</Text>
@@ -151,15 +152,15 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.bg,
   },
   topBar: {
-    paddingTop: 12,
-    paddingHorizontal: 24,
-    paddingBottom: 18,
+    paddingTop: 0,
+    paddingHorizontal: 20,
+    paddingBottom: 4,
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     justifyContent: 'space-between',
-    minHeight: 78,
+    minHeight: 0,
   },
-  headerActions: { flexDirection: 'row', alignItems: 'center', gap: 12 },
+  headerActions: { flexDirection: 'row', alignItems: 'center', gap: 12, paddingTop: 2 },
   kicker: { color: theme.colors.textMuted, fontSize: 12, letterSpacing: 0.6, textTransform: 'uppercase' },
   headerTitle: {
     fontSize: 28,
@@ -171,7 +172,7 @@ const styles = StyleSheet.create({
   headerSubtitle: {
     fontSize: 13,
     color: theme.colors.textMuted,
-    marginTop: 4,
+    marginTop: 2,
   },
   heroCard: {
     marginHorizontal: 20,

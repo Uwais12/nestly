@@ -1,11 +1,11 @@
+import { IconSymbol } from '@/components/ui/icon-symbol';
+import { TAB_BAR_HEIGHT, TAB_BAR_MARGIN } from '@/constants/layout';
+import { theme } from '@/constants/theme';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
+import { LinearGradient } from 'expo-linear-gradient';
+import { useRouter } from 'expo-router';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useRouter } from 'expo-router';
-import { LinearGradient } from 'expo-linear-gradient';
-import { theme } from '@/constants/theme';
-import { TAB_BAR_HEIGHT, TAB_BAR_MARGIN } from '@/constants/layout';
-import { IconSymbol } from '@/components/ui/icon-symbol';
 
 export function TabBar({ state, navigation }: BottomTabBarProps) {
   const insets = useSafeAreaInsets();
@@ -32,8 +32,8 @@ export function TabBar({ state, navigation }: BottomTabBarProps) {
       style={[
         styles.wrap,
         {
-          paddingTop: 12,
-          paddingBottom: Math.max(insets.bottom, 14),
+          paddingTop: 2,
+          paddingBottom: 2,
           margin: TAB_BAR_MARGIN + 2,
         },
       ]}
