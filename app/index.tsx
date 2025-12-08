@@ -1,11 +1,11 @@
-import { Redirect, useRouter } from 'expo-router';
-import { StyleSheet, Text, View, TouchableOpacity, StatusBar } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { Glass } from '@/components/ui/Glass';
+import { theme } from '@/constants/theme';
+import { useSession } from '@/hooks/useSession';
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useSession } from '@/hooks/useSession';
-import { theme } from '@/constants/theme';
-import { Glass } from '@/components/ui/Glass';
+import { Redirect, useRouter } from 'expo-router';
+import { StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function Index() {
   const { session, loading } = useSession();
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     borderRadius: 999,
-    backgroundColor: theme.colors.surfaceAlt,
+    backgroundColor: '#FBF7F7',
     alignItems: 'center',
     justifyContent: 'center',
     shadowColor: '#000',
