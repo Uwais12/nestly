@@ -28,7 +28,16 @@ export default function RootLayout() {
     if (fontsLoaded) SplashScreen.hideAsync();
   }, [fontsLoaded]);
 
-  if (!fontsLoaded) return null;
+  // CRITICAL: Always render ShareBootstrapper even if fonts aren't loaded yet
+  // This ensures deep links from share extension are captured immediately
+  // Otherwise, production builds lose the deep link while fonts are loading
+  if (!fontsLoaded) {
+    return (
+      <AuthProvider>
+        <ShareBootstrapper />
+      </AuthProvider>
+    );
+  }
 
   return (
     <AuthProvider>

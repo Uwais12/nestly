@@ -27,7 +27,7 @@ export function platformFromUrl(url: string): 'tiktok' | 'instagram' | 'youtube'
   if (platform === 'TikTok') return 'tiktok';
   if (platform === 'Instagram') return 'instagram';
   if (platform === 'YouTube') return 'youtube';
-  return 'web';
+    return 'web';
 }
 
 export function toDeepLink(url: string): string {

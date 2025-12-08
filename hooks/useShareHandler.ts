@@ -19,11 +19,19 @@ export function useShareHandler() {
   const router = useRouter();
   const { session } = useSession();
   const pendingShareUrl = useRef<string | null>(null);
+  const isNavigationReady = useRef(false);
+
+  // Mark navigation as ready after first render
+  useEffect(() => {
+    isNavigationReady.current = true;
+  }, []);
 
   useEffect(() => {
     async function handleDeepLink(url: string | null) {
       if (!url) return;
       console.log('[ShareHandler] Incoming URL:', url);
+      console.log('[ShareHandler] Navigation ready:', isNavigationReady.current);
+      console.log('[ShareHandler] Session available:', !!session);
       
       const { directUrl, hasDataUrlKey } = parseIncomingShare(url);
       let sharedUrl: string | null = directUrl ?? null;
@@ -33,7 +41,7 @@ export function useShareHandler() {
         console.log('[ShareHandler] Direct URL found:', sharedUrl);
 
         // If no session, store for later and bail
-        if (!session) {
+      if (!session) {
           pendingShareUrl.current = sharedUrl;
           console.log('[ShareHandler] No session yet, deferring...');
           return;
@@ -57,13 +65,13 @@ export function useShareHandler() {
         // The fix is to rebuild with the updated ShareViewController that passes URLs directly
         console.error('[ShareHandler] Cannot read from App Group - native module not available');
         console.error('[ShareHandler] Workaround: Share Extension should use: nestly://?url=ENCODED_URL');
-        return;
-      }
+                      return;
+                   }
     }
 
     // 1. Handle Cold Start (app launched via deep link)
     Linking.getInitialURL().then((url) => {
-      if (url) handleDeepLink(url);
+       if (url) handleDeepLink(url);
     });
 
     // 2. Handle Runtime URL events (app already running)
@@ -73,38 +81,38 @@ export function useShareHandler() {
     // Only run this check if NOT in Expo Go
     const isExpoGo = Constants.executionEnvironment === ExecutionEnvironment.StoreClient;
     if (!isExpoGo && Platform.OS !== 'web') {
-      try {
-        // eslint-disable-next-line @typescript-eslint/no-var-requires
-        const ShareMenu = require('react-native-share-menu');
-        if (ShareMenu) {
-          ShareMenu.getInitialShare((share: any) => {
-            if (share?.data) {
-              const data = typeof share.data === 'string' ? share.data : share.data[0]?.data;
-              if (data && typeof data === 'string' && data.startsWith('http')) {
-                if (!session) {
-                  pendingShareUrl.current = data;
-                  return;
-                }
+       try {
+          // eslint-disable-next-line @typescript-eslint/no-var-requires
+      const ShareMenu = require('react-native-share-menu');
+          if (ShareMenu) {
+             ShareMenu.getInitialShare((share: any) => {
+                if (share?.data) {
+                   const data = typeof share.data === 'string' ? share.data : share.data[0]?.data;
+                   if (data && typeof data === 'string' && data.startsWith('http')) {
+                      if (!session) {
+                        pendingShareUrl.current = data;
+                        return;
+                      }
                 router.push(`/share?url=${encodeURIComponent(data)}`);
-              }
-            }
-          });
-          ShareMenu.addNewShareListener((share: any) => {
-            if (share?.data) {
-              const data = typeof share.data === 'string' ? share.data : share.data[0]?.data;
-              if (data && typeof data === 'string' && data.startsWith('http')) {
-                if (!session) {
-                  pendingShareUrl.current = data;
-                  return;
+                   }
                 }
+             });
+             ShareMenu.addNewShareListener((share: any) => {
+                if (share?.data) {
+                   const data = typeof share.data === 'string' ? share.data : share.data[0]?.data;
+                   if (data && typeof data === 'string' && data.startsWith('http')) {
+                      if (!session) {
+                        pendingShareUrl.current = data;
+                        return;
+                      }
                 router.push(`/share?url=${encodeURIComponent(data)}`);
-              }
-            }
-          });
-        }
-      } catch {
-        // Module not found, ignore
-      }
+                   }
+                }
+             });
+          }
+    } catch {
+          // Module not found, ignore
+       }
     }
 
     return () => {
