@@ -7,39 +7,38 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		037B11796C61437DAFD85FC2 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3B1CAA02E046FBB395631B /* ShareViewController.swift */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
-		27CD5D04B2B30602012D12E6 /* libPods-nestly.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D8F7920734A31013AC2D0E4 /* libPods-nestly.a */; };
-		2E05ABBB1E9616E418068B4E /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 6E81D8402EF741D0A465A00B /* PrivacyInfo.xcprivacy */; };
+		17BDD4A10F8548B88EA5BCD7 /* ShareExtensionPreprocessor.js in Resources */ = {isa = PBXBuildFile; fileRef = E85A8245CE024C94AE952520 /* ShareExtensionPreprocessor.js */; };
+		256E2D0B8E09F9B1543178A3 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 1333B1FA22BF42C0AB7A3F3E /* PrivacyInfo.xcprivacy */; };
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
-		5D7412292EE613990063F17E /* ShareDataReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7412282EE613990063F17E /* ShareDataReader.swift */; };
-		5F938AC33320463B99FFCD83 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB137D26D8B34659AE327698 /* ShareViewController.swift */; };
-		6C191A3CE5ED437A87D5C392 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCC93BFB5F2949B7BBA478ED /* MainInterface.storyboard */; };
-		7C8458F19681421A88638598 /* ShareExtension.appex in Copy Files */ = {isa = PBXBuildFile; fileRef = D18B615DAF2343DEA1F5BE57 /* ShareExtension.appex */; };
+		A79FFD9286F01C2F91F0102A /* libPods-nestly.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AD7A9F8E1C5F6000A5D6DC00 /* libPods-nestly.a */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
-		EAC12AAE8C2E4CD38616A2C0 /* ShareExtensionPreprocessor.js in Resources */ = {isa = PBXBuildFile; fileRef = 0CF2CDE2FE56482591CC0293 /* ShareExtensionPreprocessor.js */; };
-		EE89781DD86F43E4BF8C9B15 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 6E81D8402EF741D0A465A00B /* PrivacyInfo.xcprivacy */; };
+		D33F9B367D3B434583D29AA7 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 572EF3C4A87C4C6AA8BE5F6C /* MainInterface.storyboard */; };
+		DB0BC859AB54B3A9B795447B /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2520D73C08CDFC00C8F142 /* ExpoModulesProvider.swift */; };
+		DC397EE7B6F74A7A9D18DB4A /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 1333B1FA22BF42C0AB7A3F3E /* PrivacyInfo.xcprivacy */; };
+		E848A14137AA421A9C84B6C0 /* ShareExtension.appex in Copy Files */ = {isa = PBXBuildFile; fileRef = EC1C853926C8453499C70D3C /* ShareExtension.appex */; };
 		F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11748412D0307B40044C1D9 /* AppDelegate.swift */; };
-		F42238E228C7A62CABD30770 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDBD332CE4EABE3457DADAA /* ExpoModulesProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		9BD6144AA1684349B930FF15 /* PBXContainerItemProxy */ = {
+		F2C61802D2BC4725894C1988 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 63F7D377DC42478DB4204AB4;
+			remoteGlobalIDString = F1B3880004E24ADC8427174F;
 			remoteInfo = ShareExtension;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		D75A8429AD5044E79E27BEC8 /* Copy Files */ = {
+		C3B29927C65F438FAF7D92D2 /* Copy Files */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				7C8458F19681421A88638598 /* ShareExtension.appex in Copy Files */,
+				E848A14137AA421A9C84B6C0 /* ShareExtension.appex in Copy Files */,
 			);
 			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -47,26 +46,25 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		08D2506B9FB34BA3BE9B5F24 /* ShareExtension.entitlements */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; path = ShareExtension.entitlements; sourceTree = "<group>"; };
-		0CF2CDE2FE56482591CC0293 /* ShareExtensionPreprocessor.js */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; path = ShareExtensionPreprocessor.js; sourceTree = "<group>"; };
+		107B1B138F964B8B98A7FC77 /* ShareExtension.entitlements */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = ShareExtension.entitlements; path = ShareExtension.entitlements; sourceTree = "<group>"; };
+		1333B1FA22BF42C0AB7A3F3E /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = PrivacyInfo.xcprivacy; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* nestly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nestly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = nestly/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = nestly/Info.plist; sourceTree = "<group>"; };
-		5D7412282EE613990063F17E /* ShareDataReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareDataReader.swift; sourceTree = "<group>"; };
-		6E81D8402EF741D0A465A00B /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		9665BE27BBD7FB6996B6BF59 /* Pods-nestly.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nestly.debug.xcconfig"; path = "Target Support Files/Pods-nestly/Pods-nestly.debug.xcconfig"; sourceTree = "<group>"; };
-		9D8F7920734A31013AC2D0E4 /* libPods-nestly.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-nestly.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		572EF3C4A87C4C6AA8BE5F6C /* MainInterface.storyboard */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = MainInterface.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = nestly/SplashScreen.storyboard; sourceTree = "<group>"; };
-		B965856BCF954995958B8615 /* ShareExtension-Info.plist */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.plist.xml; path = "ShareExtension-Info.plist"; sourceTree = "<group>"; };
+		AA72FFF9D2110CE9FC9982A5 /* Pods-nestly.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nestly.debug.xcconfig"; path = "Target Support Files/Pods-nestly/Pods-nestly.debug.xcconfig"; sourceTree = "<group>"; };
+		AD7A9F8E1C5F6000A5D6DC00 /* libPods-nestly.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-nestly.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
-		BCC93BFB5F2949B7BBA478ED /* MainInterface.storyboard */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; path = MainInterface.storyboard; sourceTree = "<group>"; };
-		CB137D26D8B34659AE327698 /* ShareViewController.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
-		D18B615DAF2343DEA1F5BE57 /* ShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; fileEncoding = 9; includeInIndex = 0; path = ShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		BED074FD90B70DAA6D6D38C6 /* Pods-nestly.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nestly.release.xcconfig"; path = "Target Support Files/Pods-nestly/Pods-nestly.release.xcconfig"; sourceTree = "<group>"; };
+		C7B8E79B9AEC4DEFA2F8ED8C /* ShareExtension-Info.plist */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.plist.xml; name = "ShareExtension-Info.plist"; path = "ShareExtension-Info.plist"; sourceTree = "<group>"; };
+		CF3B1CAA02E046FBB395631B /* ShareViewController.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = ShareViewController.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		E85A8245CE024C94AE952520 /* ShareExtensionPreprocessor.js */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = ShareExtensionPreprocessor.js; path = ShareExtensionPreprocessor.js; sourceTree = "<group>"; };
+		EA2520D73C08CDFC00C8F142 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-nestly/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
+		EC1C853926C8453499C70D3C /* ShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = undefined; name = ShareExtension.appex; path = ShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F11748412D0307B40044C1D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = nestly/AppDelegate.swift; sourceTree = "<group>"; };
 		F11748442D0722820044C1D9 /* nestly-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "nestly-Bridging-Header.h"; path = "nestly/nestly-Bridging-Header.h"; sourceTree = "<group>"; };
-		F5E8EFB8E3D7B5B903D044B3 /* Pods-nestly.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nestly.release.xcconfig"; path = "Target Support Files/Pods-nestly/Pods-nestly.release.xcconfig"; sourceTree = "<group>"; };
-		FFDBD332CE4EABE3457DADAA /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-nestly/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,11 +72,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27CD5D04B2B30602012D12E6 /* libPods-nestly.a in Frameworks */,
+				A79FFD9286F01C2F91F0102A /* libPods-nestly.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		85E37BFE3FC945B19C3D3AC2 /* Frameworks */ = {
+		E558126C09F3473AA7451490 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -88,23 +86,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0B9FCA236DE94001A80DFCEE /* ShareExtension */ = {
+		136BE27F32E0002008B901A8 /* nestly */ = {
 			isa = PBXGroup;
 			children = (
-				CB137D26D8B34659AE327698 /* ShareViewController.swift */,
-				BCC93BFB5F2949B7BBA478ED /* MainInterface.storyboard */,
-				0CF2CDE2FE56482591CC0293 /* ShareExtensionPreprocessor.js */,
-				6E81D8402EF741D0A465A00B /* PrivacyInfo.xcprivacy */,
-				B965856BCF954995958B8615 /* ShareExtension-Info.plist */,
-				08D2506B9FB34BA3BE9B5F24 /* ShareExtension.entitlements */,
+				EA2520D73C08CDFC00C8F142 /* ExpoModulesProvider.swift */,
 			);
-			path = ShareExtension;
+			name = nestly;
 			sourceTree = "<group>";
 		};
 		13B07FAE1A68108700A75B9A /* nestly */ = {
 			isa = PBXGroup;
 			children = (
-				5D7412282EE613990063F17E /* ShareDataReader.swift */,
 				F11748412D0307B40044C1D9 /* AppDelegate.swift */,
 				F11748442D0722820044C1D9 /* nestly-Bridging-Header.h */,
 				BB2F792B24A3F905000567C9 /* Supporting */,
@@ -115,11 +107,25 @@
 			name = nestly;
 			sourceTree = "<group>";
 		};
+		175AE3CDCD3442C5BDD97058 /* ShareExtension */ = {
+			isa = PBXGroup;
+			children = (
+				CF3B1CAA02E046FBB395631B /* ShareViewController.swift */,
+				572EF3C4A87C4C6AA8BE5F6C /* MainInterface.storyboard */,
+				E85A8245CE024C94AE952520 /* ShareExtensionPreprocessor.js */,
+				1333B1FA22BF42C0AB7A3F3E /* PrivacyInfo.xcprivacy */,
+				C7B8E79B9AEC4DEFA2F8ED8C /* ShareExtension-Info.plist */,
+				107B1B138F964B8B98A7FC77 /* ShareExtension.entitlements */,
+			);
+			name = ShareExtension;
+			path = ShareExtension;
+			sourceTree = "<group>";
+		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				9D8F7920734A31013AC2D0E4 /* libPods-nestly.a */,
+				AD7A9F8E1C5F6000A5D6DC00 /* libPods-nestly.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -138,9 +144,9 @@
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				0B9FCA236DE94001A80DFCEE /* ShareExtension */,
-				94C554BF741DAE1FD956B783 /* Pods */,
-				D98B61180494C7D418846265 /* ExpoModulesProviders */,
+				175AE3CDCD3442C5BDD97058 /* ShareExtension */,
+				CE3D21761D8F71019D05FF59 /* Pods */,
+				D5EAD3158291524522013D53 /* ExpoModulesProviders */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -151,18 +157,9 @@
 			isa = PBXGroup;
 			children = (
 				13B07F961A680F5B00A75B9A /* nestly.app */,
-				D18B615DAF2343DEA1F5BE57 /* ShareExtension.appex */,
+				EC1C853926C8453499C70D3C /* ShareExtension.appex */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		94C554BF741DAE1FD956B783 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				9665BE27BBD7FB6996B6BF59 /* Pods-nestly.debug.xcconfig */,
-				F5E8EFB8E3D7B5B903D044B3 /* Pods-nestly.release.xcconfig */,
-			);
-			path = Pods;
 			sourceTree = "<group>";
 		};
 		BB2F792B24A3F905000567C9 /* Supporting */ = {
@@ -174,20 +171,22 @@
 			path = nestly/Supporting;
 			sourceTree = "<group>";
 		};
-		D98B61180494C7D418846265 /* ExpoModulesProviders */ = {
+		CE3D21761D8F71019D05FF59 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				E46D1165288CDA29DDF237C0 /* nestly */,
+				AA72FFF9D2110CE9FC9982A5 /* Pods-nestly.debug.xcconfig */,
+				BED074FD90B70DAA6D6D38C6 /* Pods-nestly.release.xcconfig */,
 			);
-			name = ExpoModulesProviders;
+			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
-		E46D1165288CDA29DDF237C0 /* nestly */ = {
+		D5EAD3158291524522013D53 /* ExpoModulesProviders */ = {
 			isa = PBXGroup;
 			children = (
-				FFDBD332CE4EABE3457DADAA /* ExpoModulesProvider.swift */,
+				136BE27F32E0002008B901A8 /* nestly */,
 			);
-			name = nestly;
+			name = ExpoModulesProviders;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -198,32 +197,32 @@
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "nestly" */;
 			buildPhases = (
 				08A4A3CD28434E44B6B9DE2E /* [CP] Check Pods Manifest.lock */,
-				ADEA8C416850AF7A2E341CD8 /* [Expo] Configure project */,
+				034F973B631D043292D98F41 /* [Expo] Configure project */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				800E24972A6A228C8D4807E9 /* [CP] Copy Pods Resources */,
-				D75A8429AD5044E79E27BEC8 /* Copy Files */,
-				DA90029CFDF63FA5F1CB3000 /* [CP] Embed Pods Frameworks */,
+				C3B29927C65F438FAF7D92D2 /* Copy Files */,
+				9FF4A6E67ACAB6375CF88DF5 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				A713845E8EFF45A9AF2F794F /* PBXTargetDependency */,
+				C7F5618A82E04236B6EB9F60 /* PBXTargetDependency */,
 			);
 			name = nestly;
 			productName = nestly;
 			productReference = 13B07F961A680F5B00A75B9A /* nestly.app */;
 			productType = "com.apple.product-type.application";
 		};
-		63F7D377DC42478DB4204AB4 /* ShareExtension */ = {
+		F1B3880004E24ADC8427174F /* ShareExtension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CF4D551F0AB44EA39F34F556 /* Build configuration list for PBXNativeTarget "ShareExtension" */;
+			buildConfigurationList = 8F3ECCE9FD37441591BA34C2 /* Build configuration list for PBXNativeTarget "ShareExtension" */;
 			buildPhases = (
-				56D66447CEC841F180D5326E /* Sources */,
-				1A8632890D4945B797512CEA /* Resources */,
-				85E37BFE3FC945B19C3D3AC2 /* Frameworks */,
+				6C008197BA814A1FA15B45DD /* Sources */,
+				40C7CA8825574305950DE446 /* Resources */,
+				E558126C09F3473AA7451490 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -231,7 +230,7 @@
 			);
 			name = ShareExtension;
 			productName = ShareExtension;
-			productReference = D18B615DAF2343DEA1F5BE57 /* ShareExtension.appex */;
+			productReference = EC1C853926C8453499C70D3C /* ShareExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -240,8 +239,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				BuildIndependentTargetsInParallel = YES;
-				LastUpgradeCheck = 1640;
+				LastUpgradeCheck = 1130;
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
 						LastSwiftMigration = 1250;
@@ -262,7 +260,7 @@
 			projectRoot = "";
 			targets = (
 				13B07F861A680F5B00A75B9A /* nestly */,
-				63F7D377DC42478DB4204AB4 /* ShareExtension */,
+				F1B3880004E24ADC8427174F /* ShareExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -275,17 +273,17 @@
 				BB2F792D24A3F905000567C9 /* Expo.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
-				2E05ABBB1E9616E418068B4E /* PrivacyInfo.xcprivacy in Resources */,
+				256E2D0B8E09F9B1543178A3 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1A8632890D4945B797512CEA /* Resources */ = {
+		40C7CA8825574305950DE446 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6C191A3CE5ED437A87D5C392 /* MainInterface.storyboard in Resources */,
-				EAC12AAE8C2E4CD38616A2C0 /* ShareExtensionPreprocessor.js in Resources */,
-				EE89781DD86F43E4BF8C9B15 /* PrivacyInfo.xcprivacy in Resources */,
+				D33F9B367D3B434583D29AA7 /* MainInterface.storyboard in Resources */,
+				17BDD4A10F8548B88EA5BCD7 /* ShareExtensionPreprocessor.js in Resources */,
+				DC397EE7B6F74A7A9D18DB4A /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,6 +306,30 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if [[ -f \"$PODS_ROOT/../.xcode.env\" ]]; then\n  source \"$PODS_ROOT/../.xcode.env\"\nfi\nif [[ -f \"$PODS_ROOT/../.xcode.env.local\" ]]; then\n  source \"$PODS_ROOT/../.xcode.env.local\"\nfi\n\n# The project root by default is one level up from the ios directory\nexport PROJECT_ROOT=\"$PROJECT_DIR\"/..\n\nif [[ \"$CONFIGURATION\" = *Debug* ]]; then\n  export SKIP_BUNDLING=1\nfi\nif [[ -z \"$ENTRY_FILE\" ]]; then\n  # Set the entry JS file using the bundler's entry resolution.\n  export ENTRY_FILE=\"$(\"$NODE_BINARY\" -e \"require('expo/scripts/resolveAppEntry')\" \"$PROJECT_ROOT\" ios absolute | tail -n 1)\"\nfi\n\nif [[ -z \"$CLI_PATH\" ]]; then\n  # Use Expo CLI\n  export CLI_PATH=\"$(\"$NODE_BINARY\" --print \"require.resolve('@expo/cli', { paths: [require.resolve('expo/package.json')] })\")\"\nfi\nif [[ -z \"$BUNDLE_COMMAND\" ]]; then\n  # Default Expo CLI command for bundling\n  export BUNDLE_COMMAND=\"export:embed\"\nfi\n\n# Source .xcode.env.updates if it exists to allow\n# SKIP_BUNDLING to be unset if needed\nif [[ -f \"$PODS_ROOT/../.xcode.env.updates\" ]]; then\n  source \"$PODS_ROOT/../.xcode.env.updates\"\nfi\n# Source local changes to allow overrides\n# if needed\nif [[ -f \"$PODS_ROOT/../.xcode.env.local\" ]]; then\n  source \"$PODS_ROOT/../.xcode.env.local\"\nfi\n\n`\"$NODE_BINARY\" --print \"require('path').dirname(require.resolve('react-native/package.json')) + '/scripts/react-native-xcode.sh'\"`\n\n";
+		};
+		034F973B631D043292D98F41 /* [Expo] Configure project */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/.xcode.env",
+				"$(SRCROOT)/.xcode.env.local",
+				"$(SRCROOT)/nestly/nestly.entitlements",
+				"$(SRCROOT)/Pods/Target Support Files/Pods-nestly/expo-configure-project.sh",
+			);
+			name = "[Expo] Configure project";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(SRCROOT)/Pods/Target Support Files/Pods-nestly/ExpoModulesProvider.swift",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# This script configures Expo modules and generates the modules provider file.\nbash -l -c \"./Pods/Target\\ Support\\ Files/Pods-nestly/expo-configure-project.sh\"\n";
 		};
 		08A4A3CD28434E44B6B9DE2E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -367,31 +389,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-nestly/Pods-nestly-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		ADEA8C416850AF7A2E341CD8 /* [Expo] Configure project */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/.xcode.env",
-				"$(SRCROOT)/.xcode.env.local",
-				"$(SRCROOT)/nestly/nestly.entitlements",
-				"$(SRCROOT)/Pods/Target Support Files/Pods-nestly/expo-configure-project.sh",
-			);
-			name = "[Expo] Configure project";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(SRCROOT)/Pods/Target Support Files/Pods-nestly/ExpoModulesProvider.swift",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# This script configures Expo modules and generates the modules provider file.\nbash -l -c \"./Pods/Target\\ Support\\ Files/Pods-nestly/expo-configure-project.sh\"\n";
-		};
-		DA90029CFDF63FA5F1CB3000 /* [CP] Embed Pods Frameworks */ = {
+		9FF4A6E67ACAB6375CF88DF5 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -421,38 +419,37 @@
 			buildActionMask = 2147483647;
 			files = (
 				F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */,
-				F42238E228C7A62CABD30770 /* ExpoModulesProvider.swift in Sources */,
-				5D7412292EE613990063F17E /* ShareDataReader.swift in Sources */,
+				DB0BC859AB54B3A9B795447B /* ExpoModulesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		56D66447CEC841F180D5326E /* Sources */ = {
+		6C008197BA814A1FA15B45DD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5F938AC33320463B99FFCD83 /* ShareViewController.swift in Sources */,
+				037B11796C61437DAFD85FC2 /* ShareViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		A713845E8EFF45A9AF2F794F /* PBXTargetDependency */ = {
+		C7F5618A82E04236B6EB9F60 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 63F7D377DC42478DB4204AB4 /* ShareExtension */;
-			targetProxy = 9BD6144AA1684349B930FF15 /* PBXContainerItemProxy */;
+			target = F1B3880004E24ADC8427174F /* ShareExtension */;
+			targetProxy = F2C61802D2BC4725894C1988 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9665BE27BBD7FB6996B6BF59 /* Pods-nestly.debug.xcconfig */;
+			baseConfigurationReference = AA72FFF9D2110CE9FC9982A5 /* Pods-nestly.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = nestly/nestly.entitlements;
-				CURRENT_PROJECT_VERSION = 40;
+				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -464,7 +461,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -483,19 +480,19 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F5E8EFB8E3D7B5B903D044B3 /* Pods-nestly.release.xcconfig */;
+			baseConfigurationReference = BED074FD90B70DAA6D6D38C6 /* Pods-nestly.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = nestly/nestly.entitlements;
-				CURRENT_PROJECT_VERSION = 40;
+				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = nestly/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -511,38 +508,13 @@
 			};
 			name = Release;
 		};
-		1FCB0137DBC043D2BECA21DB /* Release */ = {
+		3A33D87AADBB47EE9B031333 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ShareExtension/ShareExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 40;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "ShareExtension/ShareExtension-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.1;
-				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.nestly.app.share-extension";
-				PRODUCT_NAME = ShareExtension;
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		44E4D76A54AF47848BA8EDE6 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = ShareExtension/ShareExtension.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 40;
+				CURRENT_PROJECT_VERSION = 41;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -554,7 +526,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2.2;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.nestly.app.share-extension";
 				PRODUCT_NAME = ShareExtension;
@@ -588,7 +560,6 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -596,10 +567,8 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = L2Q7AH9X32;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -654,7 +623,6 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -662,10 +630,8 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
-				DEVELOPMENT_TEAM = L2Q7AH9X32;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -683,10 +649,34 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
-				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_ENABLE_EXPLICIT_MODULES = NO;
 				USE_HERMES = true;
 				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9F7F2504BCB0467396FE842C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = ShareExtension/ShareExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 41;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "ShareExtension/ShareExtension-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.2.2;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.nestly.app.share-extension";
+				PRODUCT_NAME = ShareExtension;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -711,11 +701,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CF4D551F0AB44EA39F34F556 /* Build configuration list for PBXNativeTarget "ShareExtension" */ = {
+		8F3ECCE9FD37441591BA34C2 /* Build configuration list for PBXNativeTarget "ShareExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				44E4D76A54AF47848BA8EDE6 /* Debug */,
-				1FCB0137DBC043D2BECA21DB /* Release */,
+				3A33D87AADBB47EE9B031333 /* Debug */,
+				9F7F2504BCB0467396FE842C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

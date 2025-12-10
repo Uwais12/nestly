@@ -38,22 +38,7 @@ public class AppDelegate: ExpoAppDelegate {
     open url: URL,
     options: [UIApplication.OpenURLOptionsKey: Any] = [:]
   ) -> Bool {
-    NSLog("[AppDelegate] ========== OPEN URL ==========")
-    NSLog("[AppDelegate] Received URL: \(url)")
-    NSLog("[AppDelegate] URL scheme: \(url.scheme ?? "nil")")
-    NSLog("[AppDelegate] URL host: \(url.host ?? "nil")")
-    NSLog("[AppDelegate] URL path: \(url.path)")
-    NSLog("[AppDelegate] URL query: \(url.query ?? "nil")")
-    NSLog("[AppDelegate] Options: \(options)")
-    
-    let superResult = super.application(app, open: url, options: options)
-    let linkingResult = RCTLinkingManager.application(app, open: url, options: options)
-    
-    NSLog("[AppDelegate] super.application result: \(superResult)")
-    NSLog("[AppDelegate] RCTLinkingManager result: \(linkingResult)")
-    NSLog("[AppDelegate] ========== END OPEN URL ==========")
-    
-    return superResult || linkingResult
+    return super.application(app, open: url, options: options) || RCTLinkingManager.application(app, open: url, options: options)
   }
 
   // Universal Links

@@ -448,57 +448,15 @@ class ShareViewController: UIViewController {
   }
 
   private func redirectToHostApp(type: RedirectType) {
-    NSLog("[ShareViewController] ========== REDIRECT TO HOST APP ==========")
-    NSLog("[ShareViewController] Type: \(type)")
-    NSLog("[ShareViewController] sharedWebUrl count: \(self.sharedWebUrl.count)")
-    NSLog("[ShareViewController] sharedText count: \(self.sharedText.count)")
-
-    // Always prefer sending the actual shared URL via query param; skip App Group/dataUrl entirely
-    var candidateUrl: String? = nil
-
-    // First choice: explicit web URL from the share sheet
-    if let webUrl = self.sharedWebUrl.first?.url, !webUrl.isEmpty {
-      candidateUrl = webUrl
-      NSLog("[ShareViewController] Using sharedWebUrl: \(webUrl)")
-    }
-
-    // Second choice: text that looks like a URL
-    if candidateUrl == nil, let text = self.sharedText.first, text.lowercased().hasPrefix("http") {
-      candidateUrl = text
-      NSLog("[ShareViewController] Using text URL: \(text)")
-    }
-
-    guard let rawUrl = candidateUrl,
-          let encoded = rawUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
-      NSLog("[ShareViewController] ❌ No suitable URL to forward to host app")
-      self.dismissWithError(message: "Could not extract URL to share")
-      return
-    }
-
-    let urlString = "\(shareProtocol)://?url=\(encoded)"
-    NSLog("[ShareViewController] Final URL string: \(urlString)")
-
-    guard let url = URL(string: urlString) else {
-      NSLog("[ShareViewController] ❌ Failed to create URL from string: \(urlString)")
-      self.dismissWithError(message: "Invalid URL format")
-      return
-    }
-
-    NSLog("[ShareViewController] Created URL object: \(url)")
+    let url = URL(string: "\(shareProtocol)://dataUrl=\(sharedKey)#\(type)")!
     var responder = self as UIResponder?
-    var foundApplication = false
 
     while responder != nil {
       if let application = responder as? UIApplication {
-        foundApplication = true
-        NSLog("[ShareViewController] Found UIApplication")
         if application.canOpenURL(url) {
-          NSLog("[ShareViewController] ✅ canOpenURL returned true, opening...")
-          application.open(url, options: [:]) { success in
-            NSLog("[ShareViewController] application.open completed with success: \(success)")
-          }
+          application.open(url)
         } else {
-          NSLog("[ShareViewController] ❌ canOpenURL returned false for scheme: \(shareProtocol)")
+          NSLog("redirectToHostApp canOpenURL KO: \(shareProtocol)")
           self.dismissWithError(
             message: "Application not found, invalid url scheme \(shareProtocol)")
           return
@@ -506,14 +464,7 @@ class ShareViewController: UIViewController {
       }
       responder = responder!.next
     }
-
-    if !foundApplication {
-      NSLog("[ShareViewController] ❌ Never found UIApplication in responder chain")
-    }
-
-    NSLog("[ShareViewController] Completing extension request...")
     extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
-    NSLog("[ShareViewController] ========== END REDIRECT ==========")
   }
 
   enum RedirectType {
