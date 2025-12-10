@@ -8,10 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		037B11796C61437DAFD85FC2 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3B1CAA02E046FBB395631B /* ShareViewController.swift */; };
-		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		17BDD4A10F8548B88EA5BCD7 /* ShareExtensionPreprocessor.js in Resources */ = {isa = PBXBuildFile; fileRef = E85A8245CE024C94AE952520 /* ShareExtensionPreprocessor.js */; };
 		256E2D0B8E09F9B1543178A3 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 1333B1FA22BF42C0AB7A3F3E /* PrivacyInfo.xcprivacy */; };
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
+		5DB164042EEA039D001A76BB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DB164032EEA039D001A76BB /* Images.xcassets */; };
 		A79FFD9286F01C2F91F0102A /* libPods-nestly.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AD7A9F8E1C5F6000A5D6DC00 /* libPods-nestly.a */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
 		D33F9B367D3B434583D29AA7 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 572EF3C4A87C4C6AA8BE5F6C /* MainInterface.storyboard */; };
@@ -49,9 +49,9 @@
 		107B1B138F964B8B98A7FC77 /* ShareExtension.entitlements */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; path = ShareExtension.entitlements; sourceTree = "<group>"; };
 		1333B1FA22BF42C0AB7A3F3E /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* nestly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nestly.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = nestly/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = nestly/Info.plist; sourceTree = "<group>"; };
 		572EF3C4A87C4C6AA8BE5F6C /* MainInterface.storyboard */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; path = MainInterface.storyboard; sourceTree = "<group>"; };
+		5DB164032EEA039D001A76BB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = nestly/SplashScreen.storyboard; sourceTree = "<group>"; };
 		AA72FFF9D2110CE9FC9982A5 /* Pods-nestly.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nestly.debug.xcconfig"; path = "Target Support Files/Pods-nestly/Pods-nestly.debug.xcconfig"; sourceTree = "<group>"; };
 		AD7A9F8E1C5F6000A5D6DC00 /* libPods-nestly.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-nestly.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,7 +100,6 @@
 				F11748412D0307B40044C1D9 /* AppDelegate.swift */,
 				F11748442D0722820044C1D9 /* nestly-Bridging-Header.h */,
 				BB2F792B24A3F905000567C9 /* Supporting */,
-				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */,
 			);
@@ -139,6 +138,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				5DB164032EEA039D001A76BB /* Images.xcassets */,
 				13B07FAE1A68108700A75B9A /* nestly */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				83CBBA001A601CBA00E9B192 /* Products */,
@@ -270,7 +270,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB2F792D24A3F905000567C9 /* Expo.plist in Resources */,
-				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				5DB164042EEA039D001A76BB /* Images.xcassets in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
 				256E2D0B8E09F9B1543178A3 /* PrivacyInfo.xcprivacy in Resources */,
 			);
@@ -446,11 +446,13 @@
 			baseConfigurationReference = AA72FFF9D2110CE9FC9982A5 /* Pods-nestly.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = nestly/nestly.entitlements;
 				CURRENT_PROJECT_VERSION = 42;
 				DEVELOPMENT_TEAM = L2Q7AH9X32;
 				ENABLE_BITCODE = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"FB_SONARKIT_ENABLED=1",
@@ -483,10 +485,12 @@
 			baseConfigurationReference = BED074FD90B70DAA6D6D38C6 /* Pods-nestly.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = nestly/nestly.entitlements;
 				CURRENT_PROJECT_VERSION = 42;
 				DEVELOPMENT_TEAM = L2Q7AH9X32;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				INFOPLIST_FILE = nestly/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
