@@ -42,5 +42,5 @@ app-example
 /android
 /ios/build
 /ios/DerivedData
-/ios/Pods
+# /ios/Pods
 .env
