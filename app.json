@@ -2,7 +2,7 @@
   "expo": {
     "name": "nestly",
     "slug": "nestly",
-    "version": "1.2.1",
+    "version": "1.2.2",
     "orientation": "portrait",
     "icon": "./assets/images/NestlyAppIcons/light/icon2_1024x1024.png",
     "scheme": "nestly",
@@ -11,7 +11,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.nestly.app",
-      "buildNumber": "2",
+      "buildNumber": "39",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
