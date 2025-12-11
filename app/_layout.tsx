@@ -54,7 +54,7 @@ export default function RootLayout() {
         <Stack.Screen name="(tabs)" />
 
         {/* Details */}
-        <Stack.Screen name="item/[id]" options={{ headerShown: true, title: 'Post' }} />
+        <Stack.Screen name="item/[id]" options={{ headerShown: false }} />
 
         {/* Share screen - auto-saves shared posts */}
         <Stack.Screen name="share" options={{ headerShown: false }} />

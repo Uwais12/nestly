@@ -121,7 +121,6 @@ export default function AllScreen() {
           data={items}
           onEndReached={loadMore}
           onOpen={(id: string) => router.push(`/item/${id}`)}
-          startAtEnd
           onScrollableChange={setScrollable}
           onScroll={(e) => {
             const y = e.nativeEvent.contentOffset.y;

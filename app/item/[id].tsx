@@ -17,6 +17,7 @@ import { Glass } from '@/components/ui/Glass';
 import { Chip } from '@/components/ui/Chip';
 import { PlatformPill } from '@/components/ui/PlatformPill';
 import { useCollections, collectionsApi } from '@/hooks/useCollections';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 type ItemRow = {
   id: string;
@@ -38,6 +39,8 @@ export default function ItemDetails() {
   const { collections, refresh: refreshCollections } = useCollections();
   const [pickerOpen, setPickerOpen] = useState(false);
   const [adding, setAdding] = useState(false);
+  const insets = useSafeAreaInsets();
+  const topPad = Math.max(insets.top, 14);
 
   useEffect(() => {
     (async () => {
@@ -101,7 +104,7 @@ export default function ItemDetails() {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { paddingTop: topPad }]}>
       <View style={StyleSheet.absoluteFill} pointerEvents="none">
         <LinearGradient colors={['#0D0F12', '#0D0F12']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />
         <LinearGradient colors={['#7A5CFF22', '#00000000']} start={{ x: 0.1, y: 0 }} end={{ x: 0.9, y: 0.9 }} style={StyleSheet.absoluteFill} />
