@@ -57,5 +57,13 @@ export function instagramEmbedUrl(url: string): string | null {
 export function getFallbackThumb(url: string): string | null {
   const id = getYouTubeId(url);
   if (id) return `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
-  return null;
+
+  try {
+    const u = new URL(url);
+    const domain = u.hostname.replace(/^www\./, '');
+    // Use Google favicon service as a lightweight visual fallback
+    return `https://www.google.com/s2/favicons?sz=128&domain=${encodeURIComponent(domain)}`;
+  } catch {
+    return null;
+  }
 }

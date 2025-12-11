@@ -170,7 +170,7 @@ export default function SearchScreen() {
       <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
           <Text style={styles.title}>Search your memory</Text>
-          <Text style={styles.subtitle}>A hero-level, atmospheric search that feels effortless.</Text>
+          <Text style={styles.subtitle}>Find anything you saved by keyword, tag, or platform.</Text>
         </View>
 
         <View style={styles.heroCard}>

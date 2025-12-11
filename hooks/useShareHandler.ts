@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import * as Linking from 'expo-linking';
-import { Alert, Platform } from 'react-native';
+import { Platform } from 'react-native';
 import { useRouter } from 'expo-router';
 import Constants, { ExecutionEnvironment } from 'expo-constants';
 import { parseIncomingShare } from '@/lib/deeplinks';
@@ -17,17 +17,6 @@ import { useSession } from '@/hooks/useSession';
  * Routes to /share screen which auto-saves the post
  */
 export function useShareHandler() {
-  const enableShareDebugAlerts = true; // TODO: disable after TestFlight verification
-
-  const maybeAlert = (title: string, message: string) => {
-    if (!enableShareDebugAlerts) return;
-    try {
-      Alert.alert(title, message);
-    } catch {
-      // ignore
-    }
-  };
-
   const router = useRouter();
   const { session } = useSession();
   const pendingShareUrl = useRef<string | null>(null);
@@ -46,30 +35,15 @@ export function useShareHandler() {
       console.log('[ShareHandler] Session available:', !!session);
       
       const { directUrl, hasDataUrlKey } = parseIncomingShare(url);
-      let dataUrlKey = '';
-      try {
-        const u = new URL(url);
-        dataUrlKey = u.searchParams.get('dataUrl') ?? '';
-      } catch {
-        // ignore
-      }
-
-      maybeAlert(
-        'Share parse',
-        `raw=${url}\nurl=${directUrl ?? 'none'}\ndataUrlKey=${dataUrlKey || 'none'}\nnavReady=${isNavigationReady.current}\nsession=${!!session}`,
-      );
       let sharedUrl: string | null = directUrl ?? null;
 
       // Case 1: URL is explicitly in query param (e.g. nestly://?url=...)
       if (sharedUrl) {
         console.log('[ShareHandler] Direct URL found:', sharedUrl);
-        maybeAlert('Share URL (direct)', sharedUrl);
-
         // If no session, store for later and bail
         if (!session) {
           pendingShareUrl.current = sharedUrl;
           console.log('[ShareHandler] No session yet, deferring...');
-          maybeAlert('Share deferred (no session)', sharedUrl);
           return;
         }
         
@@ -86,7 +60,7 @@ export function useShareHandler() {
         console.warn('[ShareHandler] Deep link format:', url);
         console.warn('[ShareHandler] This suggests ShareViewController is not passing the URL in the query param');
         console.warn('[ShareHandler] Please rebuild the app to get the updated ShareViewController.swift');
-        
+
         const isExpoGo = Constants.executionEnvironment === ExecutionEnvironment.StoreClient;
         if (Platform.OS === 'ios' && !isExpoGo) {
           try {
@@ -94,10 +68,6 @@ export function useShareHandler() {
             const ShareIntent = require('expo-share-intent');
             const items = (await ShareIntent?.getSharedData?.()) ?? [];
             const extracted = extractUrlFromSharedItems(items);
-            maybeAlert(
-              'Share AppGroup payload',
-              `dataUrlKey=${dataUrlKey || 'none'}\nitems=${JSON.stringify(items)?.slice(0, 400)}\nurl=${extracted ?? 'none'}`,
-            );
 
             if (extracted) {
               if (!session) {
@@ -108,18 +78,15 @@ export function useShareHandler() {
               router.push(`/share?url=${encodeURIComponent(extracted)}`);
             } else {
               console.error('[ShareHandler] No URL found in App Group data');
-              maybeAlert('Share AppGroup empty', 'App Group data was empty. Extension may not be writing the payload.');
             }
 
             await ShareIntent?.clearSharedData?.();
           } catch (err) {
             console.error('[ShareHandler] Failed to read App Group data via expo-share-intent', err);
-            maybeAlert('Share AppGroup error', String(err));
           }
         } else {
           console.error('[ShareHandler] Cannot read from App Group - native module not available or running in Expo Go');
           console.error('[ShareHandler] Workaround: Share Extension should use: nestly://?url=ENCODED_URL');
-          maybeAlert('Share warning', 'dataUrl seen but cannot read App Group data.\nEnsure Share Extension opens nestly://?url=');
         }
         return;
       }
@@ -127,13 +94,11 @@ export function useShareHandler() {
 
     // 1. Handle Cold Start (app launched via deep link)
     Linking.getInitialURL().then((url) => {
-       maybeAlert('Share initialURL', url ?? 'none');
        if (url) handleDeepLink(url);
     });
 
     // 2. Handle Runtime URL events (app already running)
     const sub = Linking.addEventListener('url', (ev) => {
-      maybeAlert('Share url event', ev.url ?? 'none');
       handleDeepLink(ev.url);
     });
 
@@ -186,7 +151,6 @@ export function useShareHandler() {
       const url = pendingShareUrl.current;
       pendingShareUrl.current = null;
       console.log('[ShareHandler] Processing deferred share:', url);
-      maybeAlert('Share processing deferred', url);
       router.push(`/share?url=${encodeURIComponent(url)}`);
     }
   }, [session, router]);

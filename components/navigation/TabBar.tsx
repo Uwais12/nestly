@@ -54,29 +54,19 @@ export function TabBar({ state, navigation }: BottomTabBarProps) {
       <View style={styles.row}>
         {items.map((it, idx) => {
           const focused = state.index === idx;
-          const center = it.name === 'add';
           const color = focused ? '#fff' : theme.colors.textMuted;
-
-          if (center) {
-            return (
-              <Pressable
-                key={it.key}
-                accessibilityRole="button"
-                onPress={() => router.push('/modals/add-link')}
-                style={({ pressed }) => [styles.addButton, pressed && styles.addPressed]}
-              >
-                <View style={styles.addInner}>
-                  <IconSymbol name="plus" size={24} color="#fff" />
-                </View>
-              </Pressable>
-            );
-          }
 
           return (
             <Pressable
               key={it.key}
               accessibilityRole="button"
-              onPress={() => go(it.name, it.key, focused)}
+              onPress={() => {
+                if (it.name === 'add') {
+                  router.push('/modals/add-link');
+                  return;
+                }
+                go(it.name, it.key, focused);
+              }}
               style={({ pressed }) => [styles.item, focused && styles.itemActive, pressed && styles.itemPressed]}
             >
               <View style={[styles.iconPill, focused && styles.iconPillActive]}>
@@ -152,23 +142,4 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.4,
     shadowRadius: 14,
   },
-  addButton: {
-    width: 60,
-    height: 60,
-    borderRadius: 16,
-    alignItems: 'center',
-    justifyContent: 'center',
-    transform: [{ translateY: -2 }],
-  },
-  addInner: {
-    width: 52,
-    height: 52,
-    borderRadius: 14,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: theme.colors.card,
-    borderWidth: 1,
-    borderColor: theme.colors.borderSubtle,
-  },
-  addPressed: { transform: [{ translateY: -2 }, { scale: 0.97 }] },
 });
