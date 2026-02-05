@@ -355,8 +355,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Contact
 
-- **GitHub:** [@uwaisishaq](https://github.com/uwaisishaq)
-- **Project Link:** [https://github.com/uwaisishaq/nestly](https://github.com/uwaisishaq/nestly)
+- **GitHub:** [@uwaisishaq](https://github.com/Uwais12)
+- **Project Link:** [https://github.com/uwaisishaq/nestly](https://github.com/Uwais12/nestly)
 
 ---
 
