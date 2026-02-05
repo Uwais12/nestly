@@ -3,108 +3,354 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nestly - Save links. Watch later.</title>
+    <title>Nestly - Your personal cinematic watchlist</title>
+    <meta name="description" content="Nestly turns TikTok, Reels, and YouTube chaos into a calm, organized feed you can actually finish.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #FBFBFD;
-            --text: #0A0A0A;
+            --bg: #050505;
+            --surface: #121212;
+            --surface-highlight: #1E1E1E;
+            --text: #EDEDED;
+            --text-muted: #888888;
             --brand: #4F8EF7;
+            --brand-glow: rgba(79, 142, 247, 0.4);
             --accent: #7D5CFF;
+            --border: rgba(255, 255, 255, 0.08);
         }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background-color: var(--bg);
             color: var(--text);
             margin: 0;
             line-height: 1.6;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
+
+        /* Subtle Grid Background */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: -1;
+            mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+            -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+        }
+
+        /* Ambient Glow */
+        .glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--brand-glow) 0%, transparent 70%);
+            top: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0.15;
+            z-index: -1;
+            pointer-events: none;
+        }
+
         header {
-            padding: 2rem 1rem;
-            text-align: center;
-            background: linear-gradient(135deg, #FBFBFD 0%, #F0F4FF 100%);
+            padding: 2rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
         }
+
         .logo {
-            font-size: 2.5rem;
-            font-weight: 900;
-            margin: 0;
-            background: linear-gradient(90deg, var(--accent), var(--brand));
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo span {
+            background: linear-gradient(135deg, #fff 0%, #aaa 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        .tagline {
-            font-size: 1.2rem;
-            color: #666;
-            margin-top: 0.5rem;
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-left: 24px;
+            transition: color 0.2s;
         }
+
+        nav a:hover {
+            color: var(--text);
+        }
+
         main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 6rem 1.5rem;
             max-width: 800px;
             margin: 0 auto;
-            padding: 2rem 1rem;
-            flex: 1;
         }
-        .hero {
-            text-align: center;
-            margin-bottom: 3rem;
+
+        .badge {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            color: var(--brand);
+            margin-bottom: 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            animation: fadeUp 0.8s ease-out;
         }
-        .links {
+
+        h1 {
+            font-size: clamp(3rem, 8vw, 4.5rem);
+            font-weight: 800;
+            margin: 0 0 1.5rem;
+            letter-spacing: -0.04em;
+            line-height: 1.1;
+            animation: fadeUp 0.8s ease-out 0.1s backwards;
+        }
+
+        h1 span {
+            background: linear-gradient(135deg, #FFF 30%, #999 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: clamp(1.1rem, 4vw, 1.35rem);
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            font-weight: 400;
+            animation: fadeUp 0.8s ease-out 0.2s backwards;
+        }
+
+        .cta-container {
             display: flex;
             gap: 1rem;
             justify-content: center;
-            margin-top: 2rem;
+            animation: fadeUp 0.8s ease-out 0.3s backwards;
         }
-        a.button {
-            display: inline-block;
-            background-color: var(--text);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 999px;
-            text-decoration: none;
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 28px;
+            border-radius: 12px;
             font-weight: 600;
-            transition: opacity 0.2s;
-        }
-        a.button:hover {
-            opacity: 0.8;
-        }
-        footer {
-            text-align: center;
-            padding: 2rem;
-            border-top: 1px solid #eee;
-            color: #888;
-        }
-        footer a {
-            color: var(--brand);
             text-decoration: none;
-            margin: 0 10px;
+            transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+            font-size: 1rem;
+        }
+
+        .button-primary {
+            background: var(--text);
+            color: var(--bg);
+            border: 1px solid var(--text);
+        }
+
+        .button-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px -10px rgba(255, 255, 255, 0.3);
+            background: #fff;
+        }
+
+        .visual-preview {
+            margin-top: 5rem;
+            width: 100%;
+            max-width: 1000px;
+            position: relative;
+            animation: fadeUp 1s ease-out 0.5s backwards;
+        }
+
+        /* Abstract Phone Representation */
+        .phone-frame {
+            width: 300px;
+            height: 600px;
+            background: #000;
+            border-radius: 40px;
+            margin: 0 auto;
+            border: 8px solid #222;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 0 0 2px #333,
+                0 50px 100px -20px rgba(0,0,0,0.5),
+                0 30px 60px -30px var(--brand-glow);
+        }
+
+        /* Abstract UI elements inside phone */
+        .app-ui {
+            padding: 20px;
+            height: 100%;
+            background: linear-gradient(to bottom, #111, #050505);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .app-header {
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .ui-blob { background: #222; border-radius: 8px; }
+        .ui-line { height: 8px; width: 100px; }
+        .ui-circle { width: 32px; height: 32px; border-radius: 50%; }
+
+        .app-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            flex: 1;
+        }
+
+        .app-card {
+            background: #1A1A1A;
+            border-radius: 16px;
+            aspect-ratio: 9/16;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #333;
+        }
+
+        .app-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 3rem 1.5rem;
+            margin-top: auto;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin: 0 12px;
+            transition: color 0.2s;
+        }
+
+        footer a:hover {
+            color: var(--text);
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5rem; }
+            .visual-preview { margin-top: 3rem; }
+            .phone-frame { width: 260px; height: 520px; }
         }
     </style>
 </head>
 <body>
+    <div class="glow"></div>
+
     <header>
-        <h1 class="logo">Nestly</h1>
-        <p class="tagline">Delightful links, saved for later.</p>
+        <a href="#" class="logo">
+            <span>Nestly</span>
+        </a>
+        <nav>
+            <!-- <a href="support.html">Support</a> -->
+        </nav>
     </header>
 
     <main>
-        <div class="hero">
-            <h2>Your personal cinematic watchlist.</h2>
-            <p>Nestly turns TikTok, Reels, and YouTube chaos into a calm, organized feed you can actually finish.</p>
-            <div class="links">
-                <!-- Add App Store link here when available -->
-                <a href="#" class="button">Download on iOS</a>
+        <div class="badge">
+            Delightful links, saved for later
+        </div>
+        
+        <h1>
+            <span>Your personal cinematic watchlist.</span>
+        </h1>
+        
+        <p class="subtitle">
+            Nestly turns TikTok, Reels, and YouTube chaos into a calm, organized feed you can actually finish.
+        </p>
+
+        <div class="cta-container">
+            <a href="https://apps.apple.com/us/app/nestly/id6741870637" class="button button-primary">
+                Download on iOS
+            </a>
+        </div>
+
+        <div class="visual-preview">
+            <div class="phone-frame">
+                <div class="app-ui">
+                    <div class="app-header">
+                        <div class="ui-blob ui-line"></div>
+                        <div class="ui-blob ui-circle"></div>
+                    </div>
+                    <div class="app-grid">
+                        <div class="app-card" style="background: linear-gradient(45deg, #222, #333)"></div>
+                        <div class="app-card" style="background: linear-gradient(45deg, #1c1c1c, #2a2a2a)"></div>
+                        <div class="app-card" style="background: linear-gradient(45deg, #222, #333)"></div>
+                        <div class="app-card" style="background: linear-gradient(45deg, #1c1c1c, #2a2a2a)"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
 
     <footer>
-        <p>&copy; 2024 Nestly App. All rights reserved.</p>
-        <p>
+        <div style="margin-bottom: 1rem;">
+            &copy; 2026 Nestly. All rights reserved.
+        </div>
+        <div>
             <a href="privacy-policy.html">Privacy Policy</a>
             <a href="support.html">Support</a>
-        </p>
+        </div>
     </footer>
 </body>
 </html>
-

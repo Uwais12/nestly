@@ -4,34 +4,142 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Support - Nestly</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: system-ui, sans-serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 2rem; color: #333; }
-        h1 { color: #0A0A0A; }
-        h2 { margin-top: 2rem; font-size: 1.3rem; }
-        .contact-box { background: #F0F4FF; padding: 2rem; border-radius: 12px; margin-top: 2rem; text-align: center; }
-        a { color: #4F8EF7; text-decoration: none; font-weight: 600; }
-        .back { display: inline-block; margin-bottom: 2rem; color: #666; font-weight: normal; }
+        :root {
+            --bg: #050505;
+            --text: #EDEDED;
+            --text-muted: #888888;
+            --brand: #4F8EF7;
+            --border: rgba(255, 255, 255, 0.08);
+            --surface: #121212;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 1.5rem;
+            flex: 1;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        a {
+            color: var(--brand);
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        a:hover {
+            opacity: 0.8;
+        }
+
+        .back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 2rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .back:hover {
+            color: var(--text);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            margin-top: 3rem;
+            font-size: 1.5rem;
+            color: var(--text);
+            letter-spacing: -0.01em;
+        }
+
+        h3 {
+            margin-top: 2rem;
+            font-size: 1.1rem;
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        p {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .contact-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            padding: 2.5rem;
+            border-radius: 16px;
+            margin-top: 4rem;
+            text-align: center;
+        }
+
+        .contact-box h3 {
+            margin-top: 0;
+            color: var(--text);
+        }
+
+        .contact-box a {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: auto;
+        }
     </style>
 </head>
 <body>
-    <a href="index.html" class="back">&larr; Back to Nestly</a>
+    <main>
+        <a href="index.html" class="back">&larr; Back to Nestly</a>
 
-    <h1>Nestly Support</h1>
-    <p>Need help with Nestly? We're here for you.</p>
+        <h1>Nestly Support</h1>
+        <p>Need help with Nestly? We're here for you.</p>
 
-    <h2>Common Questions</h2>
-    
-    <h3>How do I save a link?</h3>
-    <p>You can save a link by copying it from any app (TikTok, Instagram, YouTube) and opening Nestly. Tap the "+" button to paste it. On iOS, you can also use the Share Sheet and tap "Nestly" to save directly.</p>
+        <h2>Common Questions</h2>
+        
+        <h3>How do I save a link?</h3>
+        <p>You can save a link by copying it from any app (TikTok, Instagram, YouTube) and opening Nestly. Tap the "+" button to paste it. On iOS, you can also use the Share Sheet and tap "Nestly" to save directly.</p>
 
-    <h3>How do I delete an account?</h3>
-    <p>To request full account deletion, please email us at the address below with the subject line "Account Deletion Request".</p>
+        <h3>How do I delete an account?</h3>
+        <p>To request full account deletion, please email us at the address below with the subject line "Account Deletion Request".</p>
 
-    <div class="contact-box">
-        <h3>Still need help?</h3>
-        <p>Contact our support team directly via email:</p>
-        <p><a href="mailto:support@nestly.app">support@nestly.app</a></p>
-    </div>
+        <div class="contact-box">
+            <h3>Still need help?</h3>
+            <p>Contact our support team directly via email:</p>
+            <p><a href="mailto:support@nestly.app">support@nestly.app</a></p>
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2026 Nestly. All rights reserved.
+    </footer>
 </body>
 </html>
-
